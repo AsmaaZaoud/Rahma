@@ -19,15 +19,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //stack navigation
 const Stack = createStackNavigator();
 
-const screenOptionStyle = {
-  headerStyle: {
-    backgroundColor: "#9AC4F8",
-  },
-  headerTintColor: "white",
-  headerBackTitle: "Back",
-};
-
-
   export default function App() {
     const [firstLaunch, setFirstLaunch] = useState(null);
     useEffect(() => {
@@ -42,7 +33,6 @@ const screenOptionStyle = {
       }
       setData();
     }, []);
-
     return (
       firstLaunch != null && (
         <NavigationContainer>
@@ -51,10 +41,10 @@ const screenOptionStyle = {
               <Stack.Screen
                 options={{ headerShown: false }}
                 name="Onboarding"
-                component={Onboard}
+                component={OnboardingScreen}
               />
             )}
-            <Stack.Screen name="Onboarding" component={Onboard} />
+            <Stack.Screen name="Home" component={HomeScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       )
