@@ -54,7 +54,7 @@ const screenOptionStyle = {
                 component={Onboard}
               />
             )}
-            <Stack.Screen name="Onboarding" component={Onboard} />
+            <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
       )
