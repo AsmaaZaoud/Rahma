@@ -14,6 +14,8 @@ I got this error so thats why i installed react-native-gesture-handler
  ERROR  TypeError: _RNGestureHandlerModule.default.flushOperations is not a function (it is undefined), js engine: hermes: hermes
 
  3. npx expo install react-native-async-storage/async-storage@1.18.2
+
+Below is the warning I got when I ran the application so I updated the async storage version as suggested in the warning:
  
 Some dependencies are incompatible with the installed expo version:
 @react-native-async-storage/async-storage@1.23.1 - expected version: 1.18.2
