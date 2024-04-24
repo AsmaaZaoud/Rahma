@@ -52,7 +52,7 @@ export default function App() {
                 component={Onboard}
               />
             )}
-            <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/>
+            {/* <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/> */}
             <Stack.Screen name="Amount" component={Amount} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
