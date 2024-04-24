@@ -47,7 +47,7 @@ const Amount = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontWeight: 'bold', fontSize: normalize(25)}}>How many bags/ boxes do you have?</Text>
+      <Text style={{fontWeight: 'bold', fontSize: normalize(22)}}>How many bags/ boxes do you have?</Text>
         <View style={styles.bar}>
             <View style={[styles.circle, { backgroundColor: '#19CCA2' }]} />
             <View style={styles.line} />
@@ -80,7 +80,7 @@ const Amount = ({navigation}) => {
         />
         </View>
 
-        <View style={{paddingTop: '30%'}}>
+        <View style={{paddingTop: '10%'}}>
           <TouchableOpacity
             style={[styles.button, isDisabled ? styles.disabledButton : styles.enabledButton]}
             // onPress={onPressContinue}
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
       circle: {
         width: width * 0.045,
         height: height * 0.02,
-        borderRadius: 10,
+        borderRadius: 20,
         borderWidth: 2,
         borderColor: '#19CCA2',
       },
@@ -134,15 +134,15 @@ const styles = StyleSheet.create({
         paddingTop: "10%"
       },
       image:{
-        width: width * 0.5,
-        height: height * 0.25,
+        width: width*0.4,
+        height: width*0.4,
       },
       button: {
         backgroundColor: '#19CCA2',
         paddingVertical: "4%",
-        paddingHorizontal: "10%",
+        // paddingHorizontal: "10%",
         borderRadius: 8,
-        width: width * 0.8
+        width: width * 0.75
       },
       buttonText: {
         color: '#fff',
