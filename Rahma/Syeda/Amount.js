@@ -1,7 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, TextInput, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import 
+{ Button, View, TextInput, StyleSheet, Text, Image, TouchableOpacity, 
+  Dimensions, PixelRatio, Platform } 
+  from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+//responsiveness
+const { width, height } = Dimensions.get("screen");
+const scale = width / 428;
+export function normalize(size) {
+  const newSize = size * scale;
+  if (Platform.OS === "ios") {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
+  }
+}
 
 const Amount = ({navigation}) => {
 
@@ -32,7 +47,7 @@ const Amount = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontWeight: 'bold', fontSize: 20}}>How many bags/ boxes do you have?</Text>
+      <Text style={{fontWeight: 'bold', fontSize: normalize(25)}}>How many bags/ boxes do you have?</Text>
         <View style={styles.bar}>
             <View style={[styles.circle, { backgroundColor: '#19CCA2' }]} />
             <View style={styles.line} />
@@ -49,7 +64,7 @@ const Amount = ({navigation}) => {
           <TextInput
           style={styles.amount}
           keyboardType="numeric"
-          placeholder="Enter how many bags/boxes"
+          placeholder="Enter number of bags/ boxes"
           value={value}
           onChangeText={onChangeText}
           />
@@ -58,14 +73,14 @@ const Amount = ({navigation}) => {
         {/* error text */}
         {error !== '' && <Text style={styles.error}>{error}</Text>}
 
-        <View style={{paddingTop: 50}}>
+        <View style={{paddingTop: '10%', alignItems:'center'}}>
           <Image
           source={require('./images/amount.png')}
           style={styles.image}
         />
         </View>
 
-        <View style={{paddingTop: 150}}>
+        <View style={{paddingTop: '30%'}}>
           <TouchableOpacity
             style={[styles.button, isDisabled ? styles.disabledButton : styles.enabledButton]}
             // onPress={onPressContinue}
@@ -86,52 +101,52 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      paddingTop: 100
+      paddingTop: '25%'
       // justifyContent: 'center',
     },
     bar: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 50,
+        paddingTop: '10%',
       },
       circle: {
-        width: 20,
-        height: 20,
+        width: width * 0.045,
+        height: height * 0.02,
         borderRadius: 10,
         borderWidth: 2,
         borderColor: '#19CCA2',
       },
       line: {
-        width: 50,
-        height: 2,
+        width: width * 0.15,
+        height: height * 0.001,
         backgroundColor: '#19CCA2',
-      },
+      }, 
       amount: {
         borderWidth: 1,
         borderColor: '#19CCA2',
         borderRadius: 10,
-        paddingHorizontal: 20,
-        paddingVertical: 8,
-        fontSize: 16,
-        width: 300
+        paddingVertical: "3%",
+        fontSize: normalize(20),
+        textAlign: 'center',
+        width: width * 0.8
       },
       input:{
-        paddingTop: 40
+        paddingTop: "10%"
       },
       image:{
-        width: 200,
-        height: 200,
+        width: width * 0.5,
+        height: height * 0.25,
       },
       button: {
         backgroundColor: '#19CCA2',
-        paddingVertical: 12,
-        paddingHorizontal: 20,
+        paddingVertical: "4%",
+        paddingHorizontal: "10%",
         borderRadius: 8,
-        width: 300
+        width: width * 0.8
       },
       buttonText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: normalize(20),
         fontWeight: 'bold',
         textAlign: 'center',
       },
@@ -143,7 +158,7 @@ const styles = StyleSheet.create({
       },
       error: {
         color: 'red',
-        paddingTop: 15,
+        paddingTop: "5%",
       },
   });
   
