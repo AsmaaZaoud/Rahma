@@ -5,19 +5,17 @@ import React, { useEffect, useState } from "react";
 // react-native link react-native-gesture-handler
 // import "@react-native-gesture-handler";
 
-import HomeScreen from "./Syeda/HomeScreen";
-
-import { NavigationContainer } from "@react-navigation/native";
-//stack navigation
-import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //onboard - syeda
 import Onboard from "./Syeda/Onboard";
+import Amount from './Syeda/Amount';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //stack navigation
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const screenOptionStyle = {
   headerStyle: {
@@ -28,7 +26,7 @@ const screenOptionStyle = {
 };
 
 
-  export default function App() {
+export default function App() {
     const [firstLaunch, setFirstLaunch] = useState(null);
     useEffect(() => {
       async function setData() {
@@ -54,7 +52,8 @@ const screenOptionStyle = {
                 component={Onboard}
               />
             )}
-            <Stack.Screen name="Onboarding" component={Onboard} />
+            <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/>
+            <Stack.Screen name="Amount" component={Amount} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
       )
