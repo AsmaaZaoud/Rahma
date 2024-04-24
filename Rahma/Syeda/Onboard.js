@@ -5,17 +5,22 @@ import { Button, Icon } from 'react-native-elements';
 import Onboarding from 'react-native-onboarding-swiper';
 import MaterialIcons from 'react-native-vector-icons';
 
-//homescreen for test purpose
-// import HomeScreen from ;
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import Amount from './Amount';
+
+//Amount for test purpose
+// import Amount from Amount;
 
 //onboarding page to welcome first time users and give them a introduction of what the app is for
-const Onboard = () => {
-
+const Onboard = ({navigation}) => {
+  // const navigation = NavigationContainer()
   return(
    // <View><Text>Onboards sceren</Text></View>
   <Onboarding
     showDone={false}
-    onSkip={() => {}
+    onSkip={() => navigation.navigate('Amount')
       
       // this is where you will redirect the user to the login page
     }
@@ -67,7 +72,7 @@ const Onboard = () => {
             textStyle={{ color: '#19CCA2' }}
             onPress={() => {
               // This is where you will  redirect the user if they click this button
-              // navigation.navigate("Login");
+              navigation.navigate('Amount');
               StatusBar.setBarStyle('default');
             }}
           />

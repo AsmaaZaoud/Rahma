@@ -2,9 +2,14 @@ This note contains links to install dependencies and packages
 
 1. Onboard
 
+INSTALLATIONS
+
 1. react-native-onboarding-swiper
 
 https://www.npmjs.com/package/react-native-onboarding-swiper
+
+
+ERROR
 
 2. npx expo install react-native-gesture-handler
 
@@ -13,9 +18,23 @@ https://stackoverflow.com/questions/77959387/error-typeerror-rngesturehandlermod
 I got this error so thats why i installed react-native-gesture-handler
  ERROR  TypeError: _RNGestureHandlerModule.default.flushOperations is not a function (it is undefined), js engine: hermes: hermes
 
- 3. npx expo install react-native-async-storage/async-storage@1.18.2
+3. npx expo install react-native-async-storage/async-storage@1.18.2
+
+Below is the warning I got when I ran the application so I updated the async storage version as suggested in the warning:
  
 Some dependencies are incompatible with the installed expo version:
 @react-native-async-storage/async-storage@1.23.1 - expected version: 1.18.2
 Your project may not work correctly until you install the correct versions of the packages.
 Fix with: npx expo install --fix
+
+2. NAVIGATION
+
+https://reactnavigation.org/docs/getting-started
+
+1. npm install @react-navigation/native
+2. npx expo install react-native-screens react-native-safe-area-context 
+OR
+npx expo install react-native-screens 
+npx expo install react-native-safe-area-context 
+3. npx expo install @react-navigation/native-stack
+
