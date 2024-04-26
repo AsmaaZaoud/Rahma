@@ -38,3 +38,8 @@ npx expo install react-native-screens
 npx expo install react-native-safe-area-context 
 3. npx expo install @react-navigation/native-stack
 
+
+
+
+
+

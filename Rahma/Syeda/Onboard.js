@@ -1,4 +1,4 @@
-import { Alert, StatusBar, Image, View, Text } from 'react-native';
+import { Alert, StatusBar, Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 import { Button, Icon } from 'react-native-elements';
@@ -8,7 +8,7 @@ import MaterialIcons from 'react-native-vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Amount from './Amount';
+import Amount, { normalize } from './Amount';
 
 //Amount for test purpose
 // import Amount from Amount;
@@ -28,34 +28,60 @@ const Onboard = ({navigation}) => {
     //the properties are title, subtitile, background color, and an image
     pages={[
       {
-        title: 'Request for Donation',
-        subtitle: 'Easily request for items that you need.',
-        backgroundColor: '#19CCA2',
+        title: (
+          <Text style={styles.heading}>
+            Request for Donation
+          </Text>
+        ),
+        subtitle: (
+          <Text style={styles.subheading}>
+            Easily request for items that you need.
+          </Text>
+        ),
         image: (
           <Image
-          style={{width: 150, height: 140}}
+          style={styles.image}
           source={require('./images/request.png')}
         />
         ),
+        backgroundColor: '#19CCA2',
       },
       {
-        title: 'Help the Needy',
-        subtitle: 'Help the needy by donating items easily.',
+        title: (
+          <Text style={styles.heading}>
+            Help the Needy
+          </Text>
+        ),
+        subtitle: (
+          <Text style={styles.subheading}>
+            Help the needy by donating items easily.
+          </Text>
+        )
+        ,
         backgroundColor: '#227ADE',
         image: (
           <Image
-          style={{width: 150, height: 140}}
+          style={styles.image}
           source={require('./images/donate.png')}
         />
         ),
       },
       {
-        title: 'Be anonymous',
-        subtitle: 'Request or donate easily without a trace of your presence.',
+        title: (
+          <Text style={styles.heading}>
+            Be anonymous
+          </Text>
+        ),
+        subtitle: (
+          <Text style={styles.subheading}>
+            Request or donate easily without a trace of your presence.
+          </Text>
+        ),
         backgroundColor: '#061826',
+        //this image will be changed to the logo later
         image: (
           <Image
-          style={{width: 150, height: 140}}
+          style={styles.image}
           source={require('./images/anonymous.png')}
         />
         ),
@@ -77,9 +103,12 @@ const Onboard = ({navigation}) => {
             }}
           />
         ),
-        backgroundColor: '#227ADE',
+        backgroundColor: '#19CCA2',
         image: (
-          <Icon name="heart" type="font-awesome" size={100} color="white" />
+          <Image
+          style={styles.image}
+          source={require('./images/WhiteLogo.png')}
+        />
         ),
       
       },
@@ -89,3 +118,22 @@ const Onboard = ({navigation}) => {
   };
 
 export default Onboard;
+
+const styles = StyleSheet.create({
+  heading: {
+    fontSize: normalize(30), 
+    fontWeight: 'bold', 
+    color: 'white',
+    paddingBottom: '3%',
+    textAlign: 'center',
+  },
+  subheading: {
+    fontSize: normalize(20), 
+    color: 'white',
+    textAlign: 'center',
+  },
+  image:{
+    width: '40%',
+    height: 150,
+  }
+})

@@ -73,18 +73,20 @@ const Amount = ({navigation}) => {
         {/* error text */}
         {error !== '' && <Text style={styles.error}>{error}</Text>}
 
-        <View style={{paddingTop: '10%', alignItems:'center'}}>
+        <View style={{paddingTop: '20%', alignItems:'center'}}>
           <Image
           source={require('./images/amount.png')}
           style={styles.image}
         />
-        </View>
+        </View> 
 
-        <View style={{paddingTop: '10%'}}>
+        <View style={{paddingTop: '30%'}}>
           <TouchableOpacity
             style={[styles.button, isDisabled ? styles.disabledButton : styles.enabledButton]}
-            // onPress={onPressContinue}
             disabled={isDisabled}
+            onPress={() => {
+              navigation.navigate('DateScreen');
+            }}
           >
             <Text style={styles.buttonText}>Continue</Text>
           </TouchableOpacity>
@@ -101,9 +103,11 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      paddingTop: '25%'
-      // justifyContent: 'center',
+      // paddingTop: '25%',
+      justifyContent: 'center',
     },
+
+    //progress bar
     bar: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -111,16 +115,21 @@ const styles = StyleSheet.create({
       },
       circle: {
         width: width * 0.045,
-        height: height * 0.02,
+        height: width * 0.045,
         borderRadius: 20,
         borderWidth: 2,
         borderColor: '#19CCA2',
       },
       line: {
         width: width * 0.15,
-        height: height * 0.001,
+        height: width * 0.005,
         backgroundColor: '#19CCA2',
       }, 
+
+      //amount input field
+      input:{
+        paddingTop: "10%"
+      },
       amount: {
         borderWidth: 1,
         borderColor: '#19CCA2',
@@ -130,17 +139,23 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: width * 0.8
       },
-      input:{
-        paddingTop: "10%"
+
+      //error message
+      error: {
+        color: 'red',
+        paddingTop: "5%",
       },
+
+      //image
       image:{
         width: width*0.4,
         height: width*0.4,
       },
+
+      //continue button
       button: {
         backgroundColor: '#19CCA2',
         paddingVertical: "4%",
-        // paddingHorizontal: "10%",
         borderRadius: 8,
         width: width * 0.75
       },
@@ -156,9 +171,6 @@ const styles = StyleSheet.create({
       disabledButton: {
         backgroundColor: 'gray',
       },
-      error: {
-        color: 'red',
-        paddingTop: "5%",
-      },
+
   });
   
