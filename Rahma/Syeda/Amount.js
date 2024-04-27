@@ -47,7 +47,6 @@ const Amount = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{fontWeight: 'bold', fontSize: normalize(22)}}>How many bags/ boxes do you have?</Text>
         <View style={styles.bar}>
             <View style={[styles.circle, { backgroundColor: '#19CCA2' }]} />
             <View style={styles.line} />
@@ -56,9 +55,11 @@ const Amount = ({navigation}) => {
             <View style={styles.circle} />
             <View style={styles.line} />
             <View style={styles.circle} />
-            <View style={styles.line} />
-            <View style={styles.circle} />
+            {/* <View style={styles.line} />
+            <View style={styles.circle} /> */}
         </View>
+
+        <Text style={{fontWeight: 'bold', fontSize: normalize(22)}}>How many bags/ boxes do you have?</Text>
 
         <View style={styles.input}>
           <TextInput
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     bar: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: '10%',
+        paddingBottom: '10%',
       },
       circle: {
         width: width * 0.045,

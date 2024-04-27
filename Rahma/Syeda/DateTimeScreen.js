@@ -91,9 +91,9 @@ const DateTimeScreen = () => {
 
     // Array of time of day options
     const timeOfDayOptions = [
-      { label: 'Morning', timeRange: '8AM - 12PM' },
-      { label: 'Afternoon', timeRange: '12PM - 6PM' },
-      { label: 'Evening', timeRange: '6PM - 10PM' },
+      { label: 'Morning', timeRange: '8AM - 12PM', image: require('./images/Morning.png') },
+      { label: 'Afternoon', timeRange: '12PM - 6PM', image: require('./images/Afternoon.png') },
+      { label: 'Evening', timeRange: '6PM - 10PM', image: require('./images/Evening.png') },
     ];
     // Array of option values
     const DateRangeOptions = [
@@ -107,8 +107,6 @@ const DateTimeScreen = () => {
       <View style={styles.container}>
 
         {/* progress bar */}
-
-        <Text style={{fontWeight: 'bold', fontSize: normalize(22)}}>Select a date interval</Text>
           <View style={styles.bar}>
               <View style={[styles.circle, { backgroundColor: '#19CCA2' }]} />
               <View style={styles.line} />
@@ -117,103 +115,74 @@ const DateTimeScreen = () => {
               <View style={styles.circle} />
               <View style={styles.line} />
               <View style={styles.circle} />
-              <View style={styles.line} />
-              <View style={styles.circle} />
           </View>
+
+          <Text style={{fontWeight: 'bold', fontSize: normalize(22), paddingBottom: '10%'}}>Select a date interval</Text>
 
         {/* checkboxes + date + calendar images */}
 
-        <View style={styles.dateImage}> 
+        <View style={styles.dateTimeContainer}> 
 
           {
             DateRangeOptions.map((option, index) => (
               <View key={index} style={styles.dateBox}>
-
-              {/* {console.log('index: ' , index)} */}
               <View style={{width: '50%', alignItems: 'flex-start'}}>
               <TouchableOpacity
-              // key={index}
               style={styles.checkboxContainer}
               onPress={() => handleDateRangeChange(option.label)}
               >
                 <View style={[styles.checkbox, selectedDateRange === option.label && styles.checked]}></View>
-                <Text style={styles.dateText}>{option.value}</Text>
+                <Text style={{fontSize:normalize(18)}}>{option.value}</Text>
               </TouchableOpacity>
               </View>
 
               <View style={{width: '50%', alignItems: 'flex-end'}}>
                 <Image
-                  source={require('./images/calendar.jpg')}
+                  source={require('./images/calendar.png')}
                   style={styles.image}
                 ></Image>
               </View>
-
               </View>
             ))
           }
 
-          {/* <View style={styles.dateBox}>
+        </View>
+
+        {/* time of the day */}
+
+        <Text style={{fontWeight: 'bold', fontSize: normalize(22), paddingBottom: '10%'}}>Select a time interval</Text>
+        <View style={styles.dateTimeContainer}>
+        {/* Loop through time of day options */}
+        {timeOfDayOptions.map((timeOfDay, index) => (
+          <View key={index} style={styles.dateBox}>
+
           <View style={{width: '50%', alignItems: 'flex-start'}}>
           <TouchableOpacity
+            key={index}
             style={styles.checkboxContainer}
-            onPress={() => handleOptionChange('option1')}
+            onPress={() => handleTimeOfDayChange(timeOfDay.label.toLowerCase())}
           >
-            <View style={[styles.checkbox, selectedOption === 'option1' && styles.checked]} />
-            <Text style={styles.dateText}>{dateString} - {first2date}</Text>
+            <View style={[styles.checkbox, selectedTimeOfDay === timeOfDay.label.toLowerCase() && styles.checked]} />
+            <Text styles={{fontSize:normalize(18)}}>{timeOfDay.label}</Text>
+            <Text style={{marginTop: 10}}></Text>
+            <Text>{timeOfDay.timeRange}</Text>
           </TouchableOpacity>
           </View>
 
           <View style={{width: '50%', alignItems: 'flex-end'}}>
-          <Image
-            source={require('./images/calendar.jpg')}
-            style={styles.image}
-          ></Image>
-          </View>
-          </View> */}
-
-          {/* <View style={styles.dateBox}>
-          <View style={{width: '50%', alignItems: 'flex-start'}}>
-          <TouchableOpacity
-            style={styles.checkboxContainer}
-            onPress={() => handleOptionChange('option2')}
-          >
-            <View style={[styles.checkbox, selectedOption === 'option2' && styles.checked]} />
-            <Text>{sec1date} - {sec2date}</Text>
-          </TouchableOpacity>
+            {console.log(`${timeOfDay.label}`)}
+            <Image source={timeOfDay.image} style={styles.image} />
           </View>
 
-          <View style={{width: '50%', alignItems: 'flex-end'}}>
-          <Image
-            source={require('./images/calendar.jpg')}
-            style={styles.image}
-          ></Image>
           </View>
-          </View>
-
-          <View style={styles.dateBox}>
-          <View style={{width: '50%', alignItems: 'flex-start'}}>
-          <TouchableOpacity
-            style={styles.checkboxContainer}
-            onPress={() => handleOptionChange('option3')}
-          >
-            <View style={[styles.checkbox, selectedOption === 'option3' && styles.checked]} />
-            <Text>{third1date} - {third2date}</Text>
-          </TouchableOpacity>
-          </View>
-
-          <View style={{width: '50%', alignItems: 'flex-end'}}>
-          <Image
-            source={require('./images/calendar.jpg')}
-            style={styles.image}
-          ></Image>
-          </View>
-          </View> */}
-
+          
+        ))}
         </View>
 
         {/* continue button */}
 
-        <View style={{paddingTop: '15%'}}></View>
+        {/* <View style={{paddingTop: '15%'}}></View> */}
+        <View style={{paddingTop: '10%'}}></View>
         <TouchableOpacity
         style={[styles.button, isContinueDisabled && styles.disabledButton]}
         disabled={isContinueDisabled}
@@ -244,7 +213,7 @@ const styles = StyleSheet.create({
     bar: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: '10%',
+        paddingBottom: '10%',
       },
       circle: {
         width: width * 0.045,
@@ -260,8 +229,8 @@ const styles = StyleSheet.create({
       }, 
 
       //ALL dates & calendar images BOXES
-      dateImage: {
-        paddingTop: '15%',
+      dateTimeContainer: {
+        // paddingTop: '15%',
         width: '90%'
       },
 
@@ -278,9 +247,10 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         marginBottom: 10,
       },
+
       checkbox: {
-        width: 20,
-        height: 20,
+        width: width >500 ? 50: 25,
+        height: width >500 ? 50: 25,
         borderRadius: 5,
         borderWidth: 2,
         borderColor: 'black',
@@ -292,8 +262,8 @@ const styles = StyleSheet.create({
 
       //calendar image
       image:{
-        width: width*0.2,
-        height: width*0.2,
+        width: width*0.15,
+        height: width*0.15,
       },
 
       //continue button
