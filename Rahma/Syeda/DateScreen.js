@@ -132,7 +132,7 @@ const DateScreen = () => {
             onPress={() => handleOptionChange('option2')}
           >
             <View style={[styles.checkbox, selectedOption === 'option2' && styles.checked]} />
-            <Text>{sec1date} - {sec2date}</Text>
+            <Text style={styles.dateText}>{sec1date} - {sec2date}</Text>
           </TouchableOpacity>
           </View>
 
@@ -151,7 +151,7 @@ const DateScreen = () => {
             onPress={() => handleOptionChange('option3')}
           >
             <View style={[styles.checkbox, selectedOption === 'option3' && styles.checked]} />
-            <Text>{third1date} - {third2date}</Text>
+            <Text style={styles.dateText} >{third1date} - {third2date}</Text>
           </TouchableOpacity>
           </View>
 
@@ -218,6 +218,10 @@ const styles = StyleSheet.create({
         width: '90%'
       },
 
+      dateText:{
+        fontSize:normalize(18)
+      },
+
       //date + calendar image BOX
       dateBox: {
         flexDirection: 'row',
@@ -232,8 +236,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
       },
       checkbox: {
-        width: 20,
-        height: 20,
+        width: width >500 ? 50: 25,
+        height: width >500 ? 50: 25,
         borderRadius: 5,
         borderWidth: 2,
         borderColor: 'black',

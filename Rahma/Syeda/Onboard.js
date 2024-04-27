@@ -1,4 +1,4 @@
-import { Alert, StatusBar, Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Alert, StatusBar, Image, View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import React from 'react';
 
 import { Button, Icon } from 'react-native-elements';
@@ -9,6 +9,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Amount, { normalize } from './Amount';
+const { width, height } = Dimensions.get("screen");
+
 
 //Amount for test purpose
 // import Amount from Amount;
@@ -134,6 +136,6 @@ const styles = StyleSheet.create({
   },
   image:{
     width: '40%',
-    height: 150,
+    height: width/2.5,
   }
 })

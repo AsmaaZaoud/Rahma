@@ -8,7 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //responsiveness
 const { width, height } = Dimensions.get("screen");
-const scale = width / 428;
+const scale = width / 435;
 export function normalize(size) {
   const newSize = size * scale;
   if (Platform.OS === "ios") {
@@ -73,14 +73,14 @@ const Amount = ({navigation}) => {
         {/* error text */}
         {error !== '' && <Text style={styles.error}>{error}</Text>}
 
-        <View style={{paddingTop: '20%', alignItems:'center'}}>
+        <View style={{paddingTop:"10%", alignItems:'center'}}>
           <Image
           source={require('./images/amount.png')}
           style={styles.image}
         />
         </View> 
 
-        <View style={{paddingTop: '30%'}}>
+        <View style={{paddingTop: "15%"}}>
           <TouchableOpacity
             style={[styles.button, isDisabled ? styles.disabledButton : styles.enabledButton]}
             disabled={isDisabled}
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      // paddingTop: '25%',
+      // paddingTop: width> 500? '0%' : "0%",
       justifyContent: 'center',
     },
 
