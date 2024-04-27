@@ -85,7 +85,7 @@ const Amount = ({navigation}) => {
             style={[styles.button, isDisabled ? styles.disabledButton : styles.enabledButton]}
             disabled={isDisabled}
             onPress={() => {
-              navigation.navigate('DateScreen');
+              navigation.navigate('DateTimeScreen');
             }}
           >
             <Text style={styles.buttonText}>Continue</Text>
