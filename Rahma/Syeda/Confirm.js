@@ -70,8 +70,8 @@ const Confirm = ({route, navigation}) => {
                 style={styles.image}
             ></Image>
             <Text style={{fontSize: normalize(18)}}>
-                Building: {route.params.buildingNo} {" "}
-                Street: {route.params.street} {" "}
+                Building: {route.params.buildingNo} {", "}
+                Street: {route.params.street} {", "}
                 Zone: {route.params.zone}
             </Text>
           </View>
@@ -80,7 +80,7 @@ const Confirm = ({route, navigation}) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-            //   navigation.navigate('DateTimeScreen');
+               navigation.navigate('Done');
             }}
           >
             <Text style={styles.buttonText}>Continue</Text>
