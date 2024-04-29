@@ -21,7 +21,7 @@ export function normalize(size) {
 //diable button functionality
 // const isDisabled = value === '' || !(parseInt(value) >= 1 && parseInt(value) <= 5);
 
-const Address = () => {
+const Address = ({route, navigation}) => {
 
     const [buildingNo, setBuildingNo] = useState('');
     const [street, setStreet] = useState('');
@@ -120,7 +120,22 @@ const Address = () => {
             style={[styles.button, isContinueDisabled ? styles.disabledButton : styles.enabledButton]}
             disabled={isContinueDisabled}
             onPress={() => {
-            //   navigation.navigate('DateTimeScreen');
+              navigation.navigate('Confirm', 
+              {
+                selectedDateRange: route.params.selectedDateRange,
+                selectedTimeOfDay: route.params.selectedTimeOfDay,
+                amount: route.params.amount,
+                buildingNo: buildingNo,
+                street: street,
+                zone: zone
+              }
+            )
+            console.log("ADDRESS SCREEN : ")
+            console.log(
+              "date range params: ", route.params.selectedDateRange,
+              "time range: ", route.params.selectedTimeOfDay,
+              "amount: ",  route.params.amount,
+            )
             }}
           >
             <Text style={styles.buttonText}>Continue</Text>

@@ -29,16 +29,16 @@ const Amount = ({navigation}) => {
   const onChangeText = (text) => {
     // Remove non-numeric characters from input
     const numericValue = text.replace(/[^0-9]/g, '');
-    console.log("Number entered: ", text)
+    // console.log("Number entered: ", text)
     // Check if numericValue is within the range 1-5
     if (numericValue === '' || (parseInt(numericValue) >= 1 && parseInt(numericValue) <= 5)) {
       setValue(numericValue);
       setError('');
-      console.log('Value is between 1 and 5:', text);
+      // console.log('Value is between 1 and 5:', text);
     } 
     else {
       setError('Value must be between 1 and 5');
-      console.log('Error Message: ', error)
+      // console.log('Error Message: ', error)
     }
   };
 
@@ -55,8 +55,6 @@ const Amount = ({navigation}) => {
             <View style={styles.circle} />
             <View style={styles.line} />
             <View style={styles.circle} />
-            {/* <View style={styles.line} />
-            <View style={styles.circle} /> */}
         </View>
 
         <Text style={{fontWeight: 'bold', fontSize: normalize(22)}}>How many bags/ boxes do you have?</Text>
@@ -86,7 +84,8 @@ const Amount = ({navigation}) => {
             style={[styles.button, isDisabled ? styles.disabledButton : styles.enabledButton]}
             disabled={isDisabled}
             onPress={() => {
-              navigation.navigate('DateTimeScreen');
+              navigation.navigate('DateTimeScreen', {amount: value});
+              console.log('amountAMOUNT.JS: ', value)
             }}
           >
             <Text style={styles.buttonText}>Continue</Text>
