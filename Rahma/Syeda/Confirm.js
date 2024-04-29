@@ -34,7 +34,7 @@ const Confirm = ({route, navigation}) => {
               <View style={[styles.circle, { backgroundColor: '#19CCA2' }]} />
           </View>
 
-          <Text style={{fontWeight: 'bold', fontSize: normalize(22), paddingBottom: '10%'}}>Review Instant Request</Text>
+          <Text style={{fontWeight: 'bold', fontSize: normalize(22), paddingBottom: '10%', textDecorationLine: 'underline'}}>Review Instant Request</Text>
 
           <View style={styles.DateTimeBox}>
             <View style={styles.date}>
@@ -80,7 +80,7 @@ const Confirm = ({route, navigation}) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-            //   navigation.navigate('DateTimeScreen');
+               navigation.navigate('Done');
             }}
           >
             <Text style={styles.buttonText}>Continue</Text>
