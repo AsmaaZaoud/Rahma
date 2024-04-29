@@ -181,14 +181,12 @@ const DateTimeScreen = () => {
 
         {/* continue button */}
 
-        {/* <View style={{paddingTop: '15%'}}></View> */}
         <View style={{paddingTop: '10%'}}></View>
         <TouchableOpacity
         style={[styles.button, isContinueDisabled && styles.disabledButton]}
         disabled={isContinueDisabled}
         onPress={() => {
-          // Handle continue button press
-          console.log('Continue button pressed');
+          // console.log('Continue button pressed');
         }}
       >
         <Text style={styles.buttonText}>Continue</Text>

@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboard from "./Syeda/Onboard";
 import Amount from './Syeda/Amount';
 import DateTimeScreen from './Syeda/DateTimeScreen';
+import Address from './Address';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -55,7 +56,8 @@ export default function App() {
             )}
             {/* <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/> */}
             {/* <Stack.Screen name="Amount" component={Amount} options={{ headerShown: false }}/> */}
-            <Stack.Screen name="DateTimeScreen" component={DateTimeScreen} options={{ headerShown: false }}/>
+            {/* <Stack.Screen name="DateTimeScreen" component={DateTimeScreen} options={{ headerShown: false }}/> */}
+            <Stack.Screen name="Address" component={Address} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
       )
