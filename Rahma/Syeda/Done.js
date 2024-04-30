@@ -18,7 +18,7 @@ export function normalize(size) {
   }
 }
 
-const Done = () => {
+const Done = ({navigation}) => {
     return (
         <View style={styles.container}>
             <Image
@@ -40,8 +40,8 @@ const Done = () => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-            //    navigation.navigate('History');
-            }}
+              navigation.navigate('History');
+           }}
           >
             <Text style={styles.buttonText}>History</Text>
           </TouchableOpacity>

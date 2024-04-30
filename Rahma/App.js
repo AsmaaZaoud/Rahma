@@ -15,6 +15,7 @@ import DateTimeScreen from './Syeda/DateTimeScreen';
 import Address from './Syeda/Address';
 import Confirm from './Syeda/Confirm';
 import Done from './Syeda/Done';
+import History from './Syeda/History';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -62,6 +63,7 @@ export default function App() {
             <Stack.Screen name="Address" component={Address} options={{ headerShown: false }}/>
             <Stack.Screen name="Confirm" component={Confirm} options={{ headerShown: false }}/>
             <Stack.Screen name="Done" component={Done} options={{ headerShown: false }}/>
+            <Stack.Screen name="History" component={History} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
       )
