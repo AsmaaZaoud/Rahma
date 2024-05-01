@@ -41,7 +41,20 @@ function MyDrawer() {
 function BottomTabs() {
   return (
     <Tab.Navigator
-      
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === 'Feed') {
+            iconName = 'home-outline';
+          } else if (route.name === 'Article') {
+            iconName = 'newspaper-outline';
+          }
+
+          // You can return any component here that you want as the icon
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
     >
       <Tab.Screen name="Feed" component={Feed}  />
       <Tab.Screen name="Article" component={Article} options={{ headerShown: false }}  />
