@@ -18,9 +18,28 @@ export function normalize(size) {
   }
 }
 
+//firebase
+import { db } from "../config";
+import { auth } from "../config";
+import { addDoc, collection } from "firebase/firestore";
+
+
 const Confirm = ({route, navigation}) => {
 
     console.log('CONFIRM amount: ', route.params.amount);
+
+    const add = async () => {
+      const docRef = await addDoc(collection(db, "donationDetails"), {
+        dateRange: route.params.selectedDateRange,
+        timeRange: route.params.selectedTimeOfDay,
+        amount: route.params.amount,
+        buildingNo: route.params.buildingNo,
+        street: route.params.street,
+        zone: route.params.zone,
+        trackID: new Date()
+      });
+      console.log("Document written with ID: ", docRef.id);
+    };
 
     return (
         <View style={styles.container}>
@@ -76,15 +95,31 @@ const Confirm = ({route, navigation}) => {
             </Text>
           </View>
 
-          <View style={{paddingTop: "15%"}}>
+          <View style={{paddingTop: "15%", flexDirection: 'row', width: '90%', alignItems: 'center'}}>
+          
+          <View>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: '#227ADE' }]}
+            onPress={() => {
+               navigation.navigate('Amount');
+            }}
+          >
+            <Text style={styles.buttonText}>Edit</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-               navigation.navigate('Done');
+              add();
+              navigation.navigate('Done');
             }}
           >
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.buttonText}>Confirm</Text>
           </TouchableOpacity>
+        </View>
+
         </View>
 
         </View>
@@ -157,9 +192,10 @@ const styles = StyleSheet.create({
 
         button: {
             backgroundColor: '#19CCA2',
-            paddingVertical: "4%",
+            paddingVertical: "6%",
             borderRadius: 8,
-            width: width * 0.75
+            width: width * 0.4,
+            marginHorizontal: '4%'
           },
           buttonText: {
             color: '#fff',

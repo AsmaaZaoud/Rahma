@@ -26,6 +26,7 @@ const DateTimeScreen = ({ route, navigation }) => {
 
     //todays date
     const currentDate = new Date();
+    console.log("NEW DATE: ", currentDate)
     const day = currentDate.getDate();
     const month = currentDate.getMonth() + 1; // add 1 to get the correct month (0-indexed)
     const year = currentDate.getFullYear();
