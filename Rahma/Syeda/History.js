@@ -18,17 +18,6 @@ export function normalize(size) {
   }
 }
 
-import {
-  doc,
-  setDoc,
-  getDocs,
-  getDoc,
-  query,
-  where,
-  collection,
-} from "firebase/firestore";
-import { db, auth } from "../Rahma/config";
-
 const History = ({route, navigation}) => {
     return (
         <View style={styles.container}>

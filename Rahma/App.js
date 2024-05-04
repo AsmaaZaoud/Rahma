@@ -2,9 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from "react";
 
-// react-native link react-native-gesture-handler
-// import "@react-native-gesture-handler";
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,7 +13,6 @@ import Address from './Syeda/Address';
 import Confirm from './Syeda/Confirm';
 import Done from './Syeda/Done';
 import History from './Syeda/History';
-import FamilyHome from './Syeda/FamilyHome';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -58,14 +54,13 @@ export default function App() {
                 component={Onboard}
               />
             )}
-            {/* <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/>
+            <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/>
             <Stack.Screen name="Amount" component={Amount} options={{ headerShown: false }}/>
             <Stack.Screen name="DateTimeScreen" component={DateTimeScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Address" component={Address} options={{ headerShown: false }}/>
             <Stack.Screen name="Confirm" component={Confirm} options={{ headerShown: false }}/>
             <Stack.Screen name="Done" component={Done} options={{ headerShown: false }}/>
-            <Stack.Screen name="History" component={History} options={{ headerShown: false }}/> */}
-            <Stack.Screen name="FamilyHome" component={FamilyHome} options={{ headerShown: false }}></Stack.Screen>
+            <Stack.Screen name="History" component={History} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
       )
