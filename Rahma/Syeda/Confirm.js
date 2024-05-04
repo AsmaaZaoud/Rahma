@@ -23,6 +23,12 @@ import { db } from "../config";
 import { auth } from "../config";
 import { addDoc, collection } from "firebase/firestore";
 
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+// const auth = initializeAuth(app, {
+//   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+// });
+
 
 const Confirm = ({route, navigation}) => {
 
