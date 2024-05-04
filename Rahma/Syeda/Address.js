@@ -83,6 +83,7 @@ const Address = ({route, navigation}) => {
                 <TextInput
                 style={styles.input}
                 onChangeText={setBuildingNo}
+                numberOfLines={6}
                 value={buildingNo}
                 placeholder="Enter building number"
                 keyboardType="numeric"
@@ -90,29 +91,35 @@ const Address = ({route, navigation}) => {
                 />
                 <Text style={styles.error}>{buildingNoError}</Text>
             
-
-                <Text style={styles.adressText}>Street</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={setStreet}
-                value={street}
-                placeholder="Enter zone number"
-                keyboardType="numeric"
-                onBlur={validateForm}
-                />
-                <Text style={styles.error}>{streetError}</Text>
+                <View style={{flexDirection: 'row', width: '100%'}}>
+                  <View style={{alignItems: 'center'}}>
+                  <Text style={styles.adressText}>Street</Text>
+                  <TextInput
+                  style={styles.input2}
+                  onChangeText={setStreet}
+                  value={street}
+                  placeholder="Enter zone number"
+                  keyboardType="numeric"
+                  onBlur={validateForm}
+                  />
+                  <Text style={styles.error}>{streetError}</Text>
+                  </View>
             
 
-                <Text style={styles.adressText}>Zone</Text>
-                <TextInput
-                style={styles.input}
-                onChangeText={setZone}
-                value={zone}
-                placeholder="Enter street number"
-                keyboardType="numeric"
-                onBlur={validateForm}
-                />
-                <Text style={styles.error}>{zoneError}</Text>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={styles.adressText}>Zone</Text>
+                    <TextInput
+                    style={styles.input2}
+                    onChangeText={setZone}
+                    value={zone}
+                    placeholder="Enter street number"
+                    keyboardType="numeric"
+                    onBlur={validateForm}
+                    />
+                    <Text style={styles.error}>{zoneError}</Text>
+                  </View>
+
+                </View>
           </View>
 
           <View style={{paddingTop: "30%"}}>
@@ -199,8 +206,21 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
         paddingVertical: 5,
-        width: '80%',
+        width: '100%',
       },
+
+      input2: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        backgroundColor: 'white',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        marginHorizontal: 10,
+        width: '90%',
+      },
+
+
       error: {
         color: 'red',
       },
