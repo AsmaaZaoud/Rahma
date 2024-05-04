@@ -12,27 +12,15 @@ import {
   Linking,
   SafeAreaView,
 } from "react-native";
-import { Block, theme } from "galio-framework";
-// import { Feather } from "@expo/vector-icons";
-// //Firebase
-// import { auth, db } from "../../config";
-// import {
-//   doc,
-//   query,
-//   collection,
-//   onSnapshot,
-//   setDoc,
-//   addDoc,
-// } from "firebase/firestore";
-// import * as Notifications from "expo-notifications";
+import { Block } from "galio-framework";
+
 
 import {
   Feather,
   FontAwesome,
   Ionicons,
-  MaterialCommunityIcons,
+  EvilIcons
 } from "react-native-vector-icons";
-
 const { width, height } = Dimensions.get("screen");
 const scale = width / 428;
 export function normalize(size) {
@@ -59,7 +47,10 @@ const DriverHome = (props) => {
   const [type, setType] = useState("pick");
 
   const change = (type) => {
+
     console.log("changeeee", orders.length);
+
+    try{
     if (type == "deliv") {
       setType("deliv");
 
@@ -76,37 +67,18 @@ const DriverHome = (props) => {
         )
       );
     }
+  }catch(err){
+    console.log(err)
+  }
   };
 
 
   return (
-    <View>
-       <View
-        style={{
-          backgroundColor: "#3C4DBD",
-          width: width,
-          height: height * 0.1,
-        }}
-      >
-        <View style={styles.topl}>
-          <Image
-            source={require("../assets/white.png")}
-            style={{ width: 150, height: 50 }}
-            width={width * 0.35}
-            height={height * 0.062}
-          />
-          <Pressable >
-            <Feather
-              name="log-out"
-              size={deviceType == "mobile" ? 35 : 45}
-              color="white"
-            />
-          </Pressable>
-        </View>
-      </View>
-
-
-
+    <View  style={{
+      backgroundColor: "white",
+      height:height 
+    }}>
+   
       <Block style={styles.nav}>
         <Pressable onPress={() => change("pick")}>
           <Text style={type == "pick" ? styles.selected : styles.unselected}>
@@ -139,10 +111,10 @@ const DriverHome = (props) => {
                       <Text style={styles.cardTitle}>#{x.num}</Text>
                     </View>
                     <View style={styles.userCard}>
-                      <FontAwesome
-                        name="user-circle-o"
+                      <Feather
+                        name="user"
                         size={50}
-                        color="#1a1f87"
+                        // color="#fffff"
                       />
                       <View style={{ marginLeft: 10 }}>
                         <Text
@@ -191,18 +163,17 @@ const DriverHome = (props) => {
                       }}
                     >
                       <View style={[styles.dataView, { flexDirection: "row" }]}>
-                        <Ionicons
-                          name="today"
-                          size={30}
-                          color="#3C4DBD"
+                        <EvilIcons
+                          name="calendar"
+                          size={45}
+                          // color="#fffff"
                         />
                         <Text style={styles.dataTitles}>{x.data.date}</Text>
                       </View>
                       <View style={[styles.dataView, { flexDirection: "row" }]}>
                         <Ionicons
                           name="time-outline"
-                          size={30}
-                          color="#3C4DBD"
+                          size={35}
                         />
                         <Text style={styles.dataTitles}>{x.data.timeSlot}</Text>
                       </View>
@@ -218,16 +189,16 @@ const DriverHome = (props) => {
                       <View style={[styles.dataView, { flexDirection: "row" }]}>
                         <Ionicons
                           name="location-outline"
-                          size={30}
-                          color="#3C4DBD"
+                          size={37}
+                          // color="#fffff"
                         />
                         <Text style={styles.dataTitles}>{x.data.location}</Text>
                       </View>
                       <View style={[styles.dataView, { flexDirection: "row" }]}>
                         <Ionicons
                           name="map-outline"
-                          size={30}
-                          color="#3C4DBD"
+                          size={35}
+                          // color="#fffff"
                         />
                         <Text
                           style={[
@@ -243,7 +214,7 @@ const DriverHome = (props) => {
                             )
                           }
                         >
-                          Open Map
+                          Open
                         </Text>
                       </View>
                     </View>
@@ -291,8 +262,8 @@ const styles = StyleSheet.create({
     padding: "4%",
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#3C4DBD",
-    marginTop: "3%",
+    // backgroundColor: "#1BDDAF",
+    marginTop: "7%",
   },
   comp: {
     //width: width,
@@ -300,9 +271,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   nav: {
-    marginVertical: "7%",
-    marginHorizontal: "19%",
-    width: width * 0.6,
+    marginVertical: "5%",
+    marginHorizontal: width * 0.25,
+    width: width * 0.5,
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "space-between",
@@ -316,17 +287,17 @@ const styles = StyleSheet.create({
     fontSize: normalize(19),
   },
   selected: {
-    color: "#3C4DBD",
+    color: "#4169E1",
     fontSize: normalize(19),
     fontWeight: "bold",
   },
   home: {
-    marginHorizontal: "10%",
+    marginHorizontal: "5%",
     height: height,
   },
   card: {
     marginVertical: "2%",
-    padding: "7%",
+    padding: "5%",
     borderWidth: 1,
     borderColor: "#cbc",
     borderRadius: 20,
@@ -334,15 +305,15 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: normalize(20),
     marginBottom: "6%",
-    // color:"#3C4DBD"
+    // color:"#fffff"
   },
   userCard: {
     borderWidth: 1,
     borderColor: "lightgrey",
-    margin: "2%",
+    // margin: "1%",
     borderRadius: 15,
     flexDirection: "row",
-    padding: "3%",
+    padding: "5%",
     marginBottom: "9%",
     shadowColor: "#666",
     shadowOffset: {
@@ -364,14 +335,14 @@ const styles = StyleSheet.create({
     marginLeft: "5%",
   },
   pickupButtonContainer: {
-    backgroundColor: "#1a1f87",
-    borderRadius: 35,
+    backgroundColor: "#4169E1",
+    borderRadius: 10,
     width: width * 0.4,
     margin: "6%",
   },
   pickupButton: {
     textAlign: "center",
-    fontSize: normalize(15),
+    fontSize: normalize(20),
     color: "#fff",
     padding: "7%",
   },
