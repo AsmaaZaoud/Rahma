@@ -72,11 +72,19 @@ const DriverHome = (props) => {
   }
   };
 
+  const map = async (lat, long, userId, type) => {
+    console.log(type);
+    
+    Linking.openURL(
+      `https://www.google.com/maps/search/?api=1&query=${lat},${long}`
+    );
+  };
+
 
   return (
     <View  style={{
       backgroundColor: "white",
-      height:height 
+      height:height*0.9, 
     }}>
    
       <Block style={styles.nav}>

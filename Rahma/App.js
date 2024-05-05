@@ -52,7 +52,8 @@ function BottomTabs() {
           </View>
           ),
       // headerRight:out,
-      // headerTitle:"",
+      headerTitle:"",
+      headerStyle:{borderWidth:0}
       
     })}
     >
