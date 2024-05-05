@@ -22,41 +22,26 @@ const Tab = createBottomTabNavigator();
 function BottomTabs() {
   return (
     <Tab.Navigator
-    
     screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
         let iconName;
-
+  
         if (route.name === 'DriverHome') {
           iconName = 'home';
         } else if (route.name === 'DriverMap') {
-          iconName = 'map';
-        }else if (route.name === 'DriverHistory') {
+          iconName = 'map-pin';
+        } else if (route.name === 'DriverHistory') {
           iconName = 'rotate-ccw';
-        }else if (route.name === 'DriverProfile') {
+        } else if (route.name === 'DriverProfile') {
           iconName = 'user';
         }
-
+  
         // You can return any component here that you want as the icon
-        return <Feather name={iconName} size={28} color={color} />;
+        return <Feather name={iconName} size={size} color={color} />;
       },
-      // headerShown: false,
-      headerLeft: () => (
-        <View style={{ marginLeft: 20, marginBottom:20 }}> 
-          <Image source={require('./assets/logo.png')} style={{ width: width/8, height: width/8 }} /> 
-        </View>
-        ),
-        headerRight: () => (
-          <View style={{ marginRight: 10, marginBottom:12 }}> 
-          <Feather name="log-out" color="black" size={40} />
-          </View>
-          ),
-      // headerRight:out,
-      headerTitle:"",
-      headerStyle:{borderWidth:0}
-      
     })}
-    >
+   
+  >
       {/* ------------ Driver ---------- */}
       <Tab.Screen name="DriverHome" component={DriverHome}   />
       <Tab.Screen name="DriverMap" component={DriverMap}  />
