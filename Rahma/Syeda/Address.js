@@ -83,7 +83,7 @@ const Address = ({route, navigation}) => {
                 <TextInput
                 style={styles.input}
                 onChangeText={setBuildingNo}
-                numberOfLines={6}
+                numberOfLines={7}
                 value={buildingNo}
                 placeholder="Enter building number"
                 keyboardType="numeric"
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
       addressBox: {
         width: '90%',
         alignItems: 'center',
-        backgroundColor: '#227ADE',
+        backgroundColor: '#021D67',
         borderRadius: 15,
         padding: '5%'
       },
@@ -207,6 +207,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
         width: '100%',
+        height:width/3
       },
 
       input2: {
@@ -217,7 +218,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
         marginHorizontal: 10,
-        width: '90%',
+        width: '95%',
+        height:width/5
       },
 
 
