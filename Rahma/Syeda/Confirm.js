@@ -101,12 +101,12 @@ const Confirm = ({route, navigation}) => {
             onPress={() => {
                navigation.navigate('Amount', 
                {
-                 selectedDateRange: route.params.selectedDateRange,
-                 selectedTimeOfDay: route.params.selectedTimeOfDay,
-                 amount: route.params.amount,
-                 buildingNo: buildingNo,
-                 street: street,
-                 zone: zone
+                //  selectedDateRange: route.params.selectedDateRange,
+                //  selectedTimeOfDay: route.params.selectedTimeOfDay,
+                //  amount: route.params.amount,
+                //  buildingNo: buildingNo,
+                //  street: street,
+                //  zone: zone
                });
             }}
           >
