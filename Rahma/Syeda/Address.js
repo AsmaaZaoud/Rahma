@@ -51,7 +51,7 @@ const Address = ({route, navigation}) => {
     
         const zoneNumber = parseInt(zone);
         if (!zone || isNaN(zoneNumber) || zoneNumber < 1 || zoneNumber > 98) {
-          setZoneError('Zone must be a number between 1 and 98');
+          setZoneError('Zone number must be between 1 and 98');
           valid = false;
         } else {
           setZoneError('');
@@ -92,13 +92,13 @@ const Address = ({route, navigation}) => {
                 <Text style={styles.error}>{buildingNoError}</Text>
             
                 <View style={{flexDirection: 'row', width: '100%'}}>
-                  <View style={{alignItems: 'center'}}>
+                  <View style={{alignItems: 'center' , width: '50%'}}>
                   <Text style={styles.adressText}>Street</Text>
                   <TextInput
                   style={styles.input2}
                   onChangeText={setStreet}
                   value={street}
-                  placeholder="Enter zone number"
+                  placeholder="Enter street number"
                   keyboardType="numeric"
                   onBlur={validateForm}
                   />
@@ -106,13 +106,13 @@ const Address = ({route, navigation}) => {
                   </View>
             
 
-                  <View style={{alignItems: 'center'}}>
+                  <View style={{alignItems: 'center', width: '50%'}}>
                     <Text style={styles.adressText}>Zone</Text>
                     <TextInput
                     style={styles.input2}
                     onChangeText={setZone}
-                    value={zone}
-                    placeholder="Enter street number"
+                    value={zone == "" ? "" : route.params.zone}
+                    placeholder="Enter zone number"
                     keyboardType="numeric"
                     onBlur={validateForm}
                     />

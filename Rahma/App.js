@@ -27,10 +27,10 @@ const screenOptionStyle = {
   headerBackTitle: "Back",
 };
 
-
 export default function App() {
     const [firstLaunch, setFirstLaunch] = useState(null);
     useEffect(() => {
+      //onbord
       async function setData() {
         const appData = await AsyncStorage.getItem("appLaunched");
         if (appData == null) {
@@ -54,13 +54,13 @@ export default function App() {
                 component={Onboard}
               />
             )}
-            {/* <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/> */}
-            {/* <Stack.Screen name="Amount" component={Amount} options={{ headerShown: false }}/>
-            <Stack.Screen name="DateTimeScreen" component={DateTimeScreen} options={{ headerShown: false }}/> */}
+            <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/>
+            <Stack.Screen name="Amount" component={Amount} options={{ headerShown: false }}/>
+            <Stack.Screen name="DateTimeScreen" component={DateTimeScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Address" component={Address} options={{ headerShown: false }}/>
-            {/* <Stack.Screen name="Confirm" component={Confirm} options={{ headerShown: false }}/> */}
-            {/* <Stack.Screen name="Done" component={Done} options={{ headerShown: false }}/>
-            <Stack.Screen name="History" component={History} options={{ headerShown: false }}/> */}
+            <Stack.Screen name="Confirm" component={Confirm} options={{ headerShown: false }}/>
+            <Stack.Screen name="Done" component={Done} options={{ headerShown: false }}/>
+            <Stack.Screen name="History" component={History} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
       )

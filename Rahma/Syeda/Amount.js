@@ -18,7 +18,16 @@ export function normalize(size) {
   }
 }
 
-const Amount = ({navigation}) => {
+const Amount = ({route, navigation}) => {
+
+  // const [routeDate, setRouteDate] = useState(route.params && route.params.selectedDateRange);
+
+  // useEffect(() => {
+  //   // Check if myProperty is undefined and set the default value if needed
+  //   if (routeDate === undefined) {
+  //     setRouteDate("defaultValue");
+  //   }
+  // }, [routeDate]);
 
   //numerical field code
 

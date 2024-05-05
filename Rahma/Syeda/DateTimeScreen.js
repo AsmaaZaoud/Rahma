@@ -211,7 +211,6 @@ const DateTimeScreen = ({ route, navigation }) => {
           navigation.navigate('Address', {
             selectedDateRange: selectedDateRange,
             selectedTimeOfDay: selectedTimeOfDay,
-            // image: timeOfDayOptions.image,
             amount: amount
           })
           // console.log('DATETIMESCREEN amount: ', value);
