@@ -43,34 +43,36 @@ const DriverHome = (props) => {
     {num:10,data:{userName:"Sara", phome:66776677, userId:"sara@ss.com", date:"27-7-2024", timeSlot:"12:03", location:"Alkhor", lat:23940596, long:373663738, type:"deliver", status:"pending"}}
   
   ])
-
   const [type, setType] = useState("pick");
 
   const change = (type) => {
-
-    console.log("changeeee", orders.length);
-
-    try{
-    if (type == "deliv") {
-      setType("deliv");
-
-      setOrders(
-        orders.filter(
-          (x) => x.data.type == "deliver" && x.data.status == "pending"
-        )
-      );
-    } else {
-      setType("pick");
-      setOrders(
-        orders.filter(
-          (x) => x.data.type == "pickup" && x.data.status == "pending"
-        )
-      );
+    try {
+      if (type === "deliv") {
+        setType("deliv");
+        if (orders.length > 0) {
+          setOrders(
+            orders.filter(
+              (x) => x.data.type === "deliver" && x.data.status === "pending"
+            )
+          );
+        } else {
+          setType("pick"); // Set the type back to "pick" when orders array is empty
+        }
+      } else {
+        setType("pick");
+        if (orders.length > 0) {
+          setOrders(
+            orders.filter(
+              (x) => x.data.type === "pickup" && x.data.status === "pending"
+            )
+          );
+        }
+      }
+    } catch (err) {
+      console.log(err);
     }
-  }catch(err){
-    console.log(err)
-  }
   };
+  
 
   const map = async (lat, long, userId, type) => {
     console.log(type);
@@ -88,14 +90,18 @@ const DriverHome = (props) => {
     }}>
    
       <Block style={styles.nav}>
-        <Pressable onPress={() => change("pick")}>
+        <Pressable 
+        // onPress={() => change("pick")}
+        >
           <Text style={type == "pick" ? styles.selected : styles.unselected}>
             Pickup
           </Text>
         </Pressable>
 
         <Text style={styles.unselected}>|</Text>
-        <Pressable onPress={() => change("deliv")}>
+        <Pressable 
+        // onPress={() => change("deliv")}
+        >
           <Text style={type == "deliv" ? styles.selected : styles.unselected}>
             Deliver
           </Text>
@@ -104,7 +110,8 @@ const DriverHome = (props) => {
       <SafeAreaView style={{ height: "85%", width: width }}>
         <ScrollView>
           <View style={styles.home}>
-            {orders.length != 0 ? (
+            {orders.length > 0 ? (
+              console.log(orders.length) &&
               orders.map((x, i) =>
                 x != undefined ? (
                   <View key={i + 2} style={styles.card}>

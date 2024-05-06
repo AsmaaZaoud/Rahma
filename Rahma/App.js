@@ -6,24 +6,32 @@ import { Feather } from '@expo/vector-icons'; // Assuming you're using Expo for 
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
 
-import DriverHome from "./Driver/DriverHome"
 import DriverMap from "./Driver/DriverMap"
 import DriverHistory from "./Driver/DriverHistory"
 import DriverProfile from "./Driver/DriverProfile"
 
 const { width, height } = Dimensions.get("screen");
 
-const out = () => <Feather name="log-out" color="black" size={40} />;
-const logo = () => <Image source={require('./assets/logo.png')} style={{ width: width/8, height: width/8 }} />;
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const CustomHeaderLeft = () => (
+  <View style={{ marginLeft: 20, marginBottom: 10 }}>
+   <Image source={require('./assets/logo.png')} style={{ width: width/8, height: width/8 }} />
+  </View>
+);
+
+const CustomHeaderRight = () => (
+  <View style={{ marginRight: 10, marginBottom: 0 }}>
+    <Feather name="log-out" color="black" size={30} />
+  </View>
+);
 function BottomTabs() {
   return (
     <Tab.Navigator
     screenOptions={({ route }) => ({
-      tabBarIcon: ({ color, size }) => {
+      tabBarIcon: ({  size }) => {
         let iconName;
   
         if (route.name === 'DriverHome') {
@@ -37,13 +45,19 @@ function BottomTabs() {
         }
   
         // You can return any component here that you want as the icon
-        return <Feather name={iconName} size={size} color={color} />;
+        return <Feather name={iconName} size={30}  />;
       },
+
+      headerLeft: () => <CustomHeaderLeft />, 
+      headerRight: () => <CustomHeaderRight />, 
+      headerTitle: ""
+
+
     })}
    
   >
       {/* ------------ Driver ---------- */}
-      <Tab.Screen name="DriverHome" component={DriverHome}   />
+      {/* <Tab.Screen name="DriverHome" component={DriverHome}   /> */}
       <Tab.Screen name="DriverMap" component={DriverMap}  />
       <Tab.Screen name="DriverHistory" component={DriverHistory} options={{ headerShown: false }}  />
       <Tab.Screen name="DriverProfile" component={DriverProfile} options={{ headerShown: false }}  />
