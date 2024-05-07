@@ -23,6 +23,23 @@ export function normalize(size) {
 
 const Address = ({route, navigation}) => {
 
+    // confirm (edit) -> amount -> dateTime -> address (this page)
+    useEffect(() => {
+      if (route.params && route.params.Routebuilding && route.params.Routestreet && route.params.Routezone) {
+        // Set input field values from route params if available
+        setBuildingNo(route.params.Routebuilding || '');
+        setStreet(route.params.Routestreet || '');
+        setZone(route.params.Routezone || '');
+      } else {
+        // If route params are not available, leave input fields empty
+        setBuildingNo('');
+        setStreet('');
+        setZone('');
+      }
+    }, [route.params]);
+
+    //for this screen
+
     const [buildingNo, setBuildingNo] = useState('');
     const [street, setStreet] = useState('');
     const [zone, setZone] = useState('');

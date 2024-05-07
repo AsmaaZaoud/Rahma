@@ -46,6 +46,20 @@ const Done = ({navigation}) => {
             <Text style={styles.buttonText}>History</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={{paddingTop: '10%'}}></View>
+           
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Amount');
+            }}
+          >
+            <Text style={styles.buttonText}>Make another donation</Text>
+          </TouchableOpacity>
+        </View>
+
         </View>
     )
 }

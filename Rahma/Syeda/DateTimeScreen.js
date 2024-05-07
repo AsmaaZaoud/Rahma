@@ -20,9 +20,31 @@ export function normalize(size) {
 
 const DateTimeScreen = ({ route, navigation }) => {
 
+    //date and time from confirm (edit) -> amount -> DateTimeScreen (this page)
+  
+    useEffect(() => {
+      if (route.params) {
+        // Set selected dates and times from route params if available
+        setSelectedDateRange(route.params.date || null);
+        console.log('route date from confirm: ', selectedDateRange)
+        setSelectedTimeOfDay(route.params.time || null);
+        console.log('route date from confirm: ', selectedTimeOfDay)
+      } else {
+        // If route params are not available, set all checkboxes to unchecked
+        setSelectedDateRange(null);
+        setSelectedTimeOfDay(null);
+      }
+    }, [route.params]);
+
     //value from  previous screen
     const amount = route.params.amount
     console.log('date time screen : ', amount);
+    const Routebuilding = route.params.Routebuilding
+    console.log('building from amount: ', Routebuilding)
+    const Routestreet = route.params.Routestreet
+    console.log('street from amount: ', Routestreet)
+    const Routezone = route.params.Routezone
+    console.log('zone from amount: ', Routezone)
 
     //todays date
     const currentDate = new Date();
@@ -163,8 +185,6 @@ const DateTimeScreen = ({ route, navigation }) => {
             onPress={() => handleTimeOfDayChange(timeOfDay.timeRange)}
           >
             <View style={[styles.checkbox, selectedTimeOfDay === timeOfDay.timeRange && styles.checked]} />
-            {/* <Text style={{fontSize:normalize(20)}}>{timeOfDay.label}</Text> */}
-            {/* <Text>{timeOfDay.timeRange}</Text> */}
             <Text style={{fontSize:normalize(20)}}>
             {timeOfDay.label}
             {"\n"}
@@ -174,7 +194,6 @@ const DateTimeScreen = ({ route, navigation }) => {
           </View>
 
           <View style={{width: '50%', alignItems: 'flex-end'}}>
-            {/* {console.log(`${timeOfDay.label}`)} */}
             <Image source={timeOfDay.image} style={styles.image} />
           </View>
 
@@ -193,9 +212,11 @@ const DateTimeScreen = ({ route, navigation }) => {
           navigation.navigate('Address', {
             selectedDateRange: selectedDateRange,
             selectedTimeOfDay: selectedTimeOfDay,
-            amount: amount
+            amount: amount,
+            Routebuilding: Routebuilding,
+            Routestreet: Routestreet,
+            Routezone: Routezone
           })
-          // console.log('DATETIMESCREEN amount: ', value);
           console.log('DATETIMESCREEN ROUTE PARAMS amount: ', amount);
           console.log('ROUTE PARAMS: ', route.params.amount)
         }}

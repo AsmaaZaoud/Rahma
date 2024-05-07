@@ -102,6 +102,11 @@ const Confirm = ({route, navigation}) => {
               // navigation.goBack()
               navigation.navigate('Amount', {
                 amount: route.params.amount,
+                date: route.params.selectedDateRange,
+                time: route.params.selectedTimeOfDay,
+                buildingNo: route.params.buildingNo,
+                street: route.params.street,
+                zone: route.params.zone,
               } )
             }
           >
