@@ -20,16 +20,15 @@ export function normalize(size) {
 
 const Amount = ({route, navigation}) => {
 
-  // const [routeDate, setRouteDate] = useState(route.params && route.params.selectedDateRange);
+  const [amount, setAmount] = useState('');
 
-  // useEffect(() => {
-  //   // Check if myProperty is undefined and set the default value if needed
-  //   if (routeDate === undefined) {
-  //     setRouteDate("defaultValue");
-  //   }
-  // }, [routeDate]);
+  useEffect(() => {
+    if (route.params && route.params.amount) {
+      setAmount(route.params.amount);
+    }
+  }, [route.params]);
 
-  //numerical field code
+  console.log('route amount from confirm: ', amount)
 
   const [value, setValue] = useState('');
   //error message if value in input field is not between 1-5
@@ -38,16 +37,14 @@ const Amount = ({route, navigation}) => {
   const onChangeText = (text) => {
     // Remove non-numeric characters from input
     const numericValue = text.replace(/[^0-9]/g, '');
-    // console.log("Number entered: ", text)
+    
     // Check if numericValue is within the range 1-5
     if (numericValue === '' || (parseInt(numericValue) >= 1 && parseInt(numericValue) <= 5)) {
       setValue(numericValue);
       setError('');
-      // console.log('Value is between 1 and 5:', text);
     } 
     else {
       setError('Value must be between 1 and 5');
-      // console.log('Error Message: ', error)
     }
   };
 

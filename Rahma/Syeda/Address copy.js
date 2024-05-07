@@ -29,46 +29,36 @@ const Address = ({route, navigation}) => {
     const [buildingNoError, setBuildingNoError] = useState('');
     const [streetError, setStreetError] = useState('');
     const [zoneError, setZoneError] = useState('');
+    const [isContinueDisabled, setIsContinueDisabled] = useState(true);
+    
+    const validateForm = () => {
 
-    const onChangeBuilding = (text) => {
-
-      const bNo = text.replace(/[^\d]/g, '');
-
-      if (bNo === text){
-        setBuildingNo(bNo)
-        setBuildingNoError('')
-      }
-      else {
-        setBuildingNoError('Building No. must be a number')
-      }
-    }
-
-    const onChangeStreet = (text) => {
-
-      const SNo = text.replace(/[^\d]/g, '');
-
-      if (SNo === text){
-        setStreet(SNo)
-        setStreetError('')
-      }
-      else {
-        setStreetError('Street must be a number')
-      }
-    }
-
-    const onChangeZone = (text) => {
-      const ZNo = text.replace(/[^\d]/g, '');
-
-      if (ZNo === '' || (parseInt(ZNo) >= 1 && parseInt(ZNo) <= 98)){
-        setZone(ZNo)
-        setZoneError('')
-      }
-      else {
-        setZoneError('Zone must be a number between 1 and 98')
-      }
-    }
-
-    const isContinueDisabled = buildingNo === '' || street === '' || zone === '' || !(parseInt(zone) >= 1 && !parseInt(zone) <= 98);
+        let valid = true;
+    
+        if (!buildingNo || isNaN(buildingNo)) {
+          setBuildingNoError('Building No. must be a number');
+          valid = false;
+        } else {
+          setBuildingNoError('');
+        }
+    
+        if (!street || isNaN(street)) {
+          setStreetError('Street must be a number');
+          valid = false;
+        } else {
+          setStreetError('');
+        }
+    
+        const zoneNumber = parseInt(zone);
+        if (!zone || isNaN(zoneNumber) || zoneNumber < 1 || zoneNumber > 98) {
+          setZoneError('Zone number must be between 1 and 98');
+          valid = false;
+        } else {
+          setZoneError('');
+        }
+    
+        setIsContinueDisabled(!valid);
+      };
 
     return (
         <View style={styles.container}>
@@ -92,11 +82,12 @@ const Address = ({route, navigation}) => {
                 <Text style={styles.adressText}>Building No.</Text>
                 <TextInput
                 style={styles.input}
-                onChangeText={onChangeBuilding}
+                onChangeText={setBuildingNo}
                 numberOfLines={7}
                 value={buildingNo}
                 placeholder="Enter building number"
                 keyboardType="numeric"
+                onBlur={validateForm}
                 />
                 <Text style={styles.error}>{buildingNoError}</Text>
             
@@ -105,10 +96,11 @@ const Address = ({route, navigation}) => {
                   <Text style={styles.adressText}>Street</Text>
                   <TextInput
                   style={styles.input2}
-                  onChangeText={onChangeStreet}
+                  onChangeText={setStreet}
                   value={street}
                   placeholder="Enter street number"
                   keyboardType="numeric"
+                  onBlur={validateForm}
                   />
                   <Text style={styles.error}>{streetError}</Text>
                   </View>
@@ -118,10 +110,11 @@ const Address = ({route, navigation}) => {
                     <Text style={styles.adressText}>Zone</Text>
                     <TextInput
                     style={styles.input2}
-                    onChangeText={onChangeZone}
+                    onChangeText={setZone}
                     value={zone}
                     placeholder="Enter zone number"
                     keyboardType="numeric"
+                    onBlur={validateForm}
                     />
                     <Text style={styles.error}>{zoneError}</Text>
                   </View>

@@ -19,25 +19,25 @@ export function normalize(size) {
 }
 
 //firebase keep
-// import { db } from "../config";
-// import { addDoc, collection } from "firebase/firestore";
+import { db } from "../config";
+import { addDoc, collection } from "firebase/firestore";
 
 const Confirm = ({route, navigation}) => {
 
-    // console.log('CONFIRM amount: ', route.params.amount);
+  let trackId = Math.floor(Math.random() * 10000);
 
-    // const add = async () => {
-    //   const docRef = await addDoc(collection(db, "donationDetails"), {
-    //     dateRange: route.params.selectedDateRange,
-    //     timeRange: route.params.selectedTimeOfDay,
-    //     amount: route.params.amount,
-    //     buildingNo: route.params.buildingNo,
-    //     street: route.params.street,
-    //     zone: route.params.zone,
-    //     trackID: new Date()
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // };
+    const add = async () => {
+      const docRef = await addDoc(collection(db, "donationDetails"), {
+        dateRange: route.params.selectedDateRange,
+        timeRange: route.params.selectedTimeOfDay,
+        amount: route.params.amount,
+        buildingNo: route.params.buildingNo,
+        street: route.params.street,
+        zone: route.params.zone,
+        trackID: trackId
+      });
+      console.log("Document written with ID: ", docRef.id);
+    };
 
     return (
         <View style={styles.container}>
@@ -98,17 +98,12 @@ const Confirm = ({route, navigation}) => {
           <View>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: '#227ADE' }]}
-            onPress={() => {
-               navigation.navigate('Amount', 
-               {
-                 selectedDateRange: route.params.selectedDateRange,
-                 selectedTimeOfDay: route.params.selectedTimeOfDay,
-                 amount: route.params.amount,
-                 buildingNo: buildingNo,
-                 street: street,
-                 zone: zone
-               });
-            }}
+            onPress={() =>
+              // navigation.goBack()
+              navigation.navigate('Amount', {
+                amount: route.params.amount,
+              } )
+            }
           >
             <Text style={styles.buttonText}>Edit</Text>
           </TouchableOpacity>
@@ -118,7 +113,7 @@ const Confirm = ({route, navigation}) => {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              // add();
+              add();
               navigation.navigate('Done');
             }}
           >
