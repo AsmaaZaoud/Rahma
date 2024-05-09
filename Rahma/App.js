@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons'; // Assuming you're using Expo for the project
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon } from 'react-native-elements';
-
+import DriverHome from "./Driver/DriverHome"
 import DriverMap from "./Driver/DriverMap"
 import DriverHistory from "./Driver/DriverHistory"
 import DriverProfile from "./Driver/DriverProfile"
@@ -57,7 +57,7 @@ function BottomTabs() {
    
   >
       {/* ------------ Driver ---------- */}
-      {/* <Tab.Screen name="DriverHome" component={DriverHome}   /> */}
+      <Tab.Screen name="DriverHome" component={DriverHome}   />
       <Tab.Screen name="DriverMap" component={DriverMap}  />
       <Tab.Screen name="DriverHistory" component={DriverHistory} options={{ headerShown: false }}  />
       <Tab.Screen name="DriverProfile" component={DriverProfile} options={{ headerShown: false }}  />
