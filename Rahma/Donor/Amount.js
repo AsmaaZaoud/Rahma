@@ -162,6 +162,7 @@ const Amount = ({route, navigation}) => {
           >
             <Text style={styles.buttonText}>Continue</Text>
           </TouchableOpacity>
+
         </View>
 
     </View>
