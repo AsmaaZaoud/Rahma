@@ -46,6 +46,9 @@ const Address = ({route, navigation}) => {
     const [buildingNoError, setBuildingNoError] = useState('');
     const [streetError, setStreetError] = useState('');
     const [zoneError, setZoneError] = useState('');
+    const [markB, setMarkB] = useState(null)
+    const [markS, setMarkS] = useState(null)
+    const [markZ, setMarkZ] = useState(null)
 
     const onChangeBuilding = (text) => {
 
@@ -54,9 +57,11 @@ const Address = ({route, navigation}) => {
       if (bNo === text){
         setBuildingNo(bNo)
         setBuildingNoError('')
+        setMarkB(null)
       }
       else {
         setBuildingNoError('Building No. must be a number')
+        setMarkB(require('./images/warning.png'))
       }
     }
 
@@ -67,21 +72,25 @@ const Address = ({route, navigation}) => {
       if (SNo === text){
         setStreet(SNo)
         setStreetError('')
+        setMarkS(null)
       }
       else {
         setStreetError('Street must be a number')
+        setMarkS(require('./images/warning.png'))
       }
     }
 
     const onChangeZone = (text) => {
       const ZNo = text.replace(/[^\d]/g, '');
 
-      if (ZNo === '' || (parseInt(ZNo) >= 1 && parseInt(ZNo) <= 98)){
+      if (ZNo === text && (parseInt(ZNo) >= 1 && parseInt(ZNo) <= 98)){
         setZone(ZNo)
         setZoneError('')
+        setMarkZ(null)
       }
       else {
         setZoneError('Zone must be a number between 1 and 98')
+        setMarkZ(require('./images/warning.png'))
       }
     }
 
@@ -108,39 +117,58 @@ const Address = ({route, navigation}) => {
           <View style={styles.addressBox}>
                 <Text style={styles.adressText}>Building No.</Text>
                 <TextInput
-                style={styles.input}
+                style={[styles.input, buildingNoError ? styles.borderError : null]}
                 onChangeText={onChangeBuilding}
                 numberOfLines={7}
                 value={buildingNo}
                 placeholder="Enter building number"
                 keyboardType="numeric"
                 />
-                <Text style={styles.error}>{buildingNoError}</Text>
+                <View style={{flexDirection: 'row', paddingBottom: '3%'}}>
+                  <Image
+                  style={styles.mark}
+                  source={markB}
+                  ></Image>
+                  <Text style={styles.error}>{buildingNoError}</Text>
+                </View>
             
                 <View style={{flexDirection: 'row', width: '100%'}}>
                   <View style={{alignItems: 'center' , width: '50%'}}>
                   <Text style={styles.adressText}>Street</Text>
                   <TextInput
-                  style={styles.input2}
+                  style={[styles.input2, streetError ? styles.borderError : null]}
                   onChangeText={onChangeStreet}
                   value={street}
                   placeholder="Enter street number"
                   keyboardType="numeric"
                   />
-                  <Text style={styles.error}>{streetError}</Text>
+                  <View style={{flexDirection: 'row', paddingBottom: '3%'}}>
+                  <Image
+                  style={styles.mark}
+                  source={markS}
+                  ></Image>
+                  <Text style={[styles.error, {width: '90%'}]}>{streetError}</Text>
+                  </View>
                   </View>
             
 
                   <View style={{alignItems: 'center', width: '50%'}}>
-                    <Text style={styles.adressText}>Zone</Text>
+                    <Text style={[styles.adressText]}>Zone</Text>
                     <TextInput
-                    style={styles.input2}
+                    style={[styles.input2, zoneError ? styles.borderError : null]}
                     onChangeText={onChangeZone}
                     value={zone}
                     placeholder="Enter zone number"
                     keyboardType="numeric"
                     />
+                    <View style={{flexDirection: 'row', paddingBottom: '3%'}}>
+                    <Image
+                    // style={[styles.mark, {marginLeft: 25}]}
+                    style={styles.mark}
+                    source={markZ}
+                    ></Image>
                     <Text style={styles.error}>{zoneError}</Text>
+                    </View>
                   </View>
 
                 </View>
@@ -248,7 +276,7 @@ const styles = StyleSheet.create({
 
 
       error: {
-        color: 'red',
+        color: 'white',
       },
 
       button: {
@@ -270,4 +298,15 @@ const styles = StyleSheet.create({
       disabledButton: {
         backgroundColor: 'gray',
       },
+
+      borderError: {
+        borderColor: 'red',
+        borderWidth: 3
+      },
+
+      mark: {
+        width: 20,
+        height: 20,
+        marginRight: '3%'
+      }
     })
