@@ -57,6 +57,8 @@ const SignUp = ( {navigation} ) => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
+  const[firebaseError, setFirebaseError] = useState('')
+
   // Function to handle input changes
   const handleUsernameChange = (text) => {
     setUsername(text);
@@ -93,17 +95,16 @@ const SignUp = ( {navigation} ) => {
   const handleSignUp = () => {
     // Perform signup logic here
     console.log('Signing up...');
-    console.log("in regstr...");
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log("registend done");
-        alert("Done!, Now log in please");
-        // navigation.navigate("Login");
+        console.log("Registration Done!");
+        navigation.navigate("Login");
         add();
       })
       .catch((error) => {
         console.log(error.message);
-        setRegisteerError("Email is already in use");
+        console.log(error.message.split("/")[1].replace(/-/g, " ").replace(/\)/g, ""))
+        setFirebaseError(error.message.split("/")[1].replace(/-/g, " ").replace(/\)/g, ""))
       });
   };
 
@@ -138,8 +139,11 @@ const SignUp = ( {navigation} ) => {
   // Function to validate password
   const validatePassword = () => {
     console.log('password lenght VALIDATEPASSWORD: ', password.length)
-    if (password.trim() === '' || password.length < 6) {
-      setIsPasswordValid(false);
+    if (password.trim() !== '' || password.length >= 5) {
+      setIsPasswordValid(true);
+    }
+    else {
+      setIsPasswordValid(false)
     }
   };
 
@@ -204,13 +208,18 @@ const SignUp = ( {navigation} ) => {
       >
         <Text style={{ textAlign: 'center', color: 'white' }}>Sign Up</Text>
       </TouchableOpacity>
+      <Text style={{paddingBottom: '2%', color: 'red'}}>{firebaseError}</Text>
 
       <View style={styles.line}></View>
 
       <View style={styles.text}>
         <View style={{ flexDirection: 'row' }}>
           <Text>Have an Account? {''}</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Login')}
+          >
           <Text style={{ color: '#19CCA2', fontWeight: 'bold' }}>Login Here</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={{ paddingTop: "3%" }}>
@@ -259,7 +268,7 @@ const styles = StyleSheet.create({
   signup: {
     backgroundColor: '#227ADE',
     borderRadius: 10,
-    marginVertical: '6%',
+    marginTop: '6%',
     width: '85%',
     paddingVertical: '3%'
   },
