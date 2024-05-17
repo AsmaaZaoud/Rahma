@@ -23,11 +23,6 @@ export function normalize(size) {
 
 const Amount = ({route, navigation}) => {
 
-  //confirm -> amount (route params)
-
-  //amount
-  // const [amount, setAmount] = useState('');
-
   const isFocused = useIsFocused(); 
 
   useEffect(() => {
@@ -42,18 +37,7 @@ const Amount = ({route, navigation}) => {
     }
   }, [isFocused]);
 
-  // useEffect(() => {
-  //   if (route.params && route.params.amount) {
-  //     setValue(route.params.amount);
-  //     console.log('route amount from confirm: ', value)
-  //   }
-  //   else {
-  //     setValue('')
-  //   }
-  // }, [route.params]);
-
-  // date & time
-
+  //date and time from confirm
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
 
@@ -155,7 +139,7 @@ const Amount = ({route, navigation}) => {
                 time: time,
                 Routebuilding: Routebuilding,
                 Routestreet: Routestreet,
-                Routezone: Routezone
+                Routezone: Routezone,
               });
               console.log('amountAMOUNT.JS: ', value)
             }}

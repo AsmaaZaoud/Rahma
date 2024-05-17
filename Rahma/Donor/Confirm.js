@@ -19,10 +19,12 @@ export function normalize(size) {
 }
 
 //firebase keep
-import { db } from "../config";
+import { db, auth } from "../config";
 import { addDoc, collection } from "firebase/firestore";
 
 const Confirm = ({route, navigation}) => {
+
+  let user = auth?.currentUser?.email;
 
   let trackId = Math.floor(Math.random() * 10000);
 
@@ -34,7 +36,8 @@ const Confirm = ({route, navigation}) => {
         buildingNo: route.params.buildingNo,
         street: route.params.street,
         zone: route.params.zone,
-        trackID: trackId
+        trackID: trackId,
+        email: user
       });
       console.log("Document written with ID: ", docRef.id);
     };
@@ -51,7 +54,8 @@ const Confirm = ({route, navigation}) => {
               <View style={[styles.circle, { backgroundColor: '#19CCA2' }]} />
           </View>
 
-          <Text style={{fontWeight: 'bold', fontSize: normalize(22), paddingBottom: '10%', textDecorationLine: 'underline'}}>Review Instant Request</Text>
+          <Text style={{fontWeight: 'bold', fontSize: normalize(22), textDecorationLine: 'underline'}}>Review Instant Request</Text>
+          <Text style={{fontSize: normalize(20), paddingBottom: '10%'}}>Your track ID is: {trackId}</Text>
 
           <View style={styles.DateTimeBox}>
             <View style={styles.date}>

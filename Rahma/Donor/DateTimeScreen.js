@@ -215,7 +215,7 @@ const DateTimeScreen = ({ route, navigation }) => {
             amount: amount,
             Routebuilding: Routebuilding,
             Routestreet: Routestreet,
-            Routezone: Routezone
+            Routezone: Routezone,
           })
           console.log('DATETIMESCREEN ROUTE PARAMS amount: ', amount);
           console.log('ROUTE PARAMS: ', route.params.amount)

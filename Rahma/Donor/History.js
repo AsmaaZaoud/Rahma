@@ -17,7 +17,7 @@ import {
   where,
   collection,
 } from "firebase/firestore";
-import { db } from "../config";
+import { db, auth } from "../config";
 
 import { useIsFocused } from "@react-navigation/native";
 
@@ -35,12 +35,29 @@ export function normalize(size) {
 
 const History = ({route, navigation}) => {
 
+  let user = auth?.currentUser?.email;
+  console.log("user: ", user)
+
   const [donationArray, setDonationArray] = useState([])
 
-  const isFocused = useIsFocused();    
+  const isFocused = useIsFocused();   
+  
+  useEffect(() => {
+    if (isFocused) {
+      readAll();
+    }
+  }, [isFocused]);
 
   const readAll = async () => {
-    const docs = await getDocs(collection(db, "donationDetails"));
+    // const docRef = doc(db, "donationDetails", user);
+    // const docSnap = await getDoc(docRef);
+    // if (docSnap.exists()) {
+    //   console.log("Document data:", docSnap.data());
+    //   } else {
+    //   console.log("No such document!");
+    // }
+      
+    const docs = await getDocs(query(collection(db, "donationDetails"),where("email", "==", user)));
     docs.forEach((doc) => {
     // doc.data() is never undefined for query doc snapshots
     console.log(doc.id, " => ", doc.data());
@@ -61,12 +78,6 @@ const History = ({route, navigation}) => {
     })
     setDonationArray(temp)
     }
-    
-    useEffect(() => {
-      if (isFocused) {
-        readAll();
-      }
-    }, [isFocused]);
 
     console.log("donation array: ", donationArray)
 
@@ -94,7 +105,7 @@ const History = ({route, navigation}) => {
                         style={styles.image}
                     ></Image>
                 </View>
-                <View style={{width: '80%', justifyContent: 'center'}}>
+                <View style={{width: '75%', justifyContent: 'center'}}>
                   <Text style={{fontSize: normalize(22), textDecorationLine: 'underline', fontWeight: 'bold'}}>TrackId : {donationItem.trackID} </Text>
                   <Text style={{fontSize: normalize(20)}}>
                   {"\n"} Amount : {donationItem.amount} {"\n"}

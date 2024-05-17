@@ -47,12 +47,13 @@ export function normalize(size) {
   }
 }
 
-const Login = ( {navigation} ) => {
+const Login = ( {route, navigation} ) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [error, setError] = useState({ satus: false, key: null, msg: "" });
+    // const [error, setError] = useState({ satus: false, key: null, msg: "" });
+    const [error, setError] = useState('')
     const [firebaseError, setFirebaseError] = useState("")
 
     const getUser = async () => {
@@ -73,41 +74,48 @@ const Login = ( {navigation} ) => {
           (email == null || email == "") &&
           (password == null || password == "")
         )
-          setError({
-            satus: true,
-            key: "email&pass",
-            msg: "Please Enter a Valid Email & Password",
-          });
+          // setError({
+          //   satus: true,
+          //   key: "email&pass",
+          //   msg: "Please Enter a Valid Email & Password",
+          // });
+          setError("Please Enter a Valid Email & Password");
         else if (!email.includes("@"))
-          setError({
-            satus: true,
-            key: "email",
-            msg: "Please Enter a Valid Email",
-          });
+          // setError({
+          //   satus: true,
+          //   key: "email",
+          //   msg: "Please Enter a Valid Email",
+          // });
+          setError("Please Enter a Valid Email");
         else if (password == null || password == "")
-          setError({
-            satus: true,
-            key: "pass",
-            msg: "Please Enter Password",
-          });
+          // setError({
+          //   satus: true,
+          //   key: "pass",
+          //   msg: "Please Enter Password",
+          // });
+          setError("Please Enter Password")
         else if (await getUser()) {
           signInWithEmailAndPassword(auth, email, password)
             .then(async () => {
-              navigation.navigate('Amount', email); //change amount to home later
-              setError({ satus: false, key: null, msg: "" });
+              navigation.navigate('Amount'); //change amount to home later
+              // navigation.navigate('Address');
+              // setError({ satus: false, key: null, msg: "" });
+              setError('')
             })
             .catch((error) => {
               console.log(error.code);
               console.log(error.message);
-              setError({ satus: true, key: "db", msg: error.message });
+              // setError({ satus: true, key: "db", msg: error.message });
+              setError(error.message)
               setFirebaseError(error.message.split("/")[1].replace(/-/g, " ").replace(/\)/g, ""))
             });
         } else {
-          setError({
-            satus: true,
-            key: "email",
-            msg: "Email is not registerd",
-          });
+          // setError({
+          //   satus: true,
+          //   key: "email",
+          //   msg: "Email is not registerd",
+          // });
+          setError("Email is not registerd")
         }
       };
 
@@ -152,7 +160,8 @@ const Login = ( {navigation} ) => {
         >
           <Text style={{ textAlign: 'center', color: 'white' }}>Login</Text>
         </TouchableOpacity>
-        <Text style={{paddingBottom: '2%', color: 'red'}}>{firebaseError}</Text>
+        {/* <Text style={{paddingBottom: '2%', color: 'red'}}>{firebaseError}</Text> */}
+        <Text style={{paddingBottom: '2%', color: 'red'}}>{error}</Text>
   
         <View style={styles.line}></View>
   
@@ -162,7 +171,7 @@ const Login = ( {navigation} ) => {
             <TouchableOpacity
               onPress={() => navigation.navigate('SignUp')}
             >
-            <Text style={{ color: '#19CCA2', fontWeight: 'bold' }}>SignUp Here</Text>
+            <Text style={{ color: '#19CCA2', fontWeight: 'bold' }}>Sign Up Here</Text>
             </TouchableOpacity>
           </View>
   

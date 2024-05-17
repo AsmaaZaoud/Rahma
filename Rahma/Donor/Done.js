@@ -18,7 +18,7 @@ export function normalize(size) {
   }
 }
 
-const Done = ({navigation}) => {
+const Done = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <Image
