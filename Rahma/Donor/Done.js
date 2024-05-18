@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import 
 { 
@@ -18,7 +19,7 @@ export function normalize(size) {
   }
 }
 
-const Done = ({navigation}) => {
+const Done = ({route, navigation}) => {
     return (
         <View style={styles.container}>
             <Image
@@ -46,6 +47,20 @@ const Done = ({navigation}) => {
             <Text style={styles.buttonText}>History</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={{paddingTop: '10%'}}></View>
+           
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Amount');
+            }}
+          >
+            <Text style={styles.buttonText}>Make another donation</Text>
+          </TouchableOpacity>
+        </View>
+
         </View>
     )
 }
