@@ -20,9 +20,31 @@ export function normalize(size) {
 
 const DateTimeScreen = ({ route, navigation }) => {
 
+    //date and time from confirm (edit) -> amount -> DateTimeScreen (this page)
+  
+    useEffect(() => {
+      if (route.params) {
+        // Set selected dates and times from route params if available
+        setSelectedDateRange(route.params.date || null);
+        console.log('route date from confirm: ', selectedDateRange)
+        setSelectedTimeOfDay(route.params.time || null);
+        console.log('route date from confirm: ', selectedTimeOfDay)
+      } else {
+        // If route params are not available, set all checkboxes to unchecked
+        setSelectedDateRange(null);
+        setSelectedTimeOfDay(null);
+      }
+    }, [route.params]);
+
     //value from  previous screen
     const amount = route.params.amount
     console.log('date time screen : ', amount);
+    const Routebuilding = route.params.Routebuilding
+    console.log('building from amount: ', Routebuilding)
+    const Routestreet = route.params.Routestreet
+    console.log('street from amount: ', Routestreet)
+    const Routezone = route.params.Routezone
+    console.log('zone from amount: ', Routezone)
 
     //todays date
     const currentDate = new Date();
@@ -30,21 +52,17 @@ const DateTimeScreen = ({ route, navigation }) => {
     const day = currentDate.getDate();
     const month = currentDate.getMonth() + 1; // add 1 to get the correct month (0-indexed)
     const year = currentDate.getFullYear();
-    // console.log("currentdate: ", currentDate);
 
     // Format the date as a string
     const dateString = `${day}/${month}/${year}`;
-    // console.log("date string: ", dateString);
 
     //first date range
     const first2 = new Date();
     first2.setDate(currentDate.getDate() + 3);
-    // console.log("first2", first2);
     const first2day = first2.getDate();
     const first2month = first2.getMonth() + 1; // add 1 to get the correct month (0-indexed)
     const first2year = first2.getFullYear();
     const first2date = `${first2day}/${first2month}/${first2year}`;
-    // console.log("first2date: ", first2date);
 
     //second date range
     const sec1 = new Date();
@@ -53,7 +71,6 @@ const DateTimeScreen = ({ route, navigation }) => {
     const sec1month = sec1.getMonth() + 1;
     const sec1year = sec1.getFullYear();
     const sec1date = `${sec1day}/${sec1month}/${sec1year}`;
-    // console.log("sec1date: ", sec1date);
   
     const sec2 = new Date();
     sec2.setDate(currentDate.getDate() + 7);
@@ -61,7 +78,6 @@ const DateTimeScreen = ({ route, navigation }) => {
     const sec2month = sec2.getMonth() + 1;
     const sec2year = sec2.getFullYear();
     const sec2date = `${sec2day}/${sec2month}/${sec2year}`;
-    // console.log("sec2date: ", sec2date);
 
     //third date range
     const third1 = new Date();
@@ -70,7 +86,6 @@ const DateTimeScreen = ({ route, navigation }) => {
     const third1month = third1.getMonth() + 1;
     const third1year = third1.getFullYear();
     const third1date = `${third1day}/${third1month}/${third1year}`;
-    // console.log("third1date: ", third1date);
   
     const third2 = new Date();
     third2.setDate(currentDate.getDate() + 11);
@@ -78,7 +93,6 @@ const DateTimeScreen = ({ route, navigation }) => {
     const third2month = third2.getMonth() + 1;
     const third2year = third2.getFullYear();
     const third2date = `${third2day}/${third2month}/${third2year}`;
-    // console.log("third2date: ", third2date);
 
         // Array of time of day options
         const timeOfDayOptions = [
@@ -98,22 +112,12 @@ const DateTimeScreen = ({ route, navigation }) => {
 
     const [selectedTimeOfDay, setSelectedTimeOfDay] = useState(null);
 
-    //to store the image string from timeOfDayOptions array
-    // const [timeImage, setTimeImage] = useState(null);
-
     const handleDateRangeChange = (optionValue) => {
       setSelectedDateRange(optionValue);
       console.log("date value: ", optionValue)
     };
 
     const handleTimeOfDayChange = (optionValue) => {
-      // console.log('optionValue: ', optionValue)
-      // //set the image based on what was chosen
-      // const selectedOption = timeOfDayOptions.find(option => option.timeRange === optionValue);
-      // console.log('selectedOption', selectedOption);
-      // setTimeImage(selectedOption.image)
-      // console.log('time Image: ', timeImage)
-
       // Set the selected time range based on what was chosen
       setSelectedTimeOfDay(optionValue);
       console.log("time value, :", optionValue)
@@ -181,8 +185,6 @@ const DateTimeScreen = ({ route, navigation }) => {
             onPress={() => handleTimeOfDayChange(timeOfDay.timeRange)}
           >
             <View style={[styles.checkbox, selectedTimeOfDay === timeOfDay.timeRange && styles.checked]} />
-            {/* <Text style={{fontSize:normalize(20)}}>{timeOfDay.label}</Text> */}
-            {/* <Text>{timeOfDay.timeRange}</Text> */}
             <Text style={{fontSize:normalize(20)}}>
             {timeOfDay.label}
             {"\n"}
@@ -192,7 +194,6 @@ const DateTimeScreen = ({ route, navigation }) => {
           </View>
 
           <View style={{width: '50%', alignItems: 'flex-end'}}>
-            {/* {console.log(`${timeOfDay.label}`)} */}
             <Image source={timeOfDay.image} style={styles.image} />
           </View>
 
@@ -211,9 +212,11 @@ const DateTimeScreen = ({ route, navigation }) => {
           navigation.navigate('Address', {
             selectedDateRange: selectedDateRange,
             selectedTimeOfDay: selectedTimeOfDay,
-            amount: amount
+            amount: amount,
+            Routebuilding: Routebuilding,
+            Routestreet: Routestreet,
+            Routezone: Routezone,
           })
-          // console.log('DATETIMESCREEN amount: ', value);
           console.log('DATETIMESCREEN ROUTE PARAMS amount: ', amount);
           console.log('ROUTE PARAMS: ', route.params.amount)
         }}
