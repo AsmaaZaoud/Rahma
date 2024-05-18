@@ -6,6 +6,9 @@ import
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+//reload
+import { useIsFocused } from "@react-navigation/native";
+
 //responsiveness
 const { width, height } = Dimensions.get("screen");
 const scale = width / 435;
@@ -20,16 +23,55 @@ export function normalize(size) {
 
 const Amount = ({route, navigation}) => {
 
-  // const [routeDate, setRouteDate] = useState(route.params && route.params.selectedDateRange);
+  const isFocused = useIsFocused(); 
 
-  // useEffect(() => {
-  //   // Check if myProperty is undefined and set the default value if needed
-  //   if (routeDate === undefined) {
-  //     setRouteDate("defaultValue");
-  //   }
-  // }, [routeDate]);
+  useEffect(() => {
+    if (isFocused) {
+      if (route.params && route.params.amount) {
+        setValue(route.params.amount);
+        console.log('route amount from confirm: ', value)
+      }
+      else {
+        setValue('')
+      }
+    }
+  }, [isFocused]);
 
-  //numerical field code
+  //date and time from confirm
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+
+  useEffect(() => {
+    if (route.params) {
+      // Set selected dates and times from route params if available
+      setDate(route.params.date || '');
+      console.log('route date from confirm: ', date)
+      setTime(route.params.time || '');
+      console.log('route time from confirm: ', time)
+    } else {
+      // If route params are not available, set all checkboxes to unchecked
+      setDate('');
+      setTime('');
+    }
+  }, [route.params]);
+
+  //address
+
+  const [Routebuilding, setRouteBuilding] = useState('');
+  const [Routestreet, setRouteStreet] = useState('');
+  const [Routezone, setRouteZone] = useState(''); 
+
+  useEffect(() => {
+    if (route.params && route.params.buildingNo && route.params.street && route.params.zone) {
+      setRouteBuilding(route.params.buildingNo);
+      console.log('route building no from confirm: ', Routebuilding)
+      setRouteStreet(route.params.street)
+      console.log('route street from confirm: ', Routestreet)
+      setRouteZone(route.params.zone)
+      console.log('route zone from confirm: ', Routezone)
+    }
+  }, [route.params]);
+
 
   const [value, setValue] = useState('');
   //error message if value in input field is not between 1-5
@@ -38,16 +80,14 @@ const Amount = ({route, navigation}) => {
   const onChangeText = (text) => {
     // Remove non-numeric characters from input
     const numericValue = text.replace(/[^0-9]/g, '');
-    // console.log("Number entered: ", text)
+    
     // Check if numericValue is within the range 1-5
     if (numericValue === '' || (parseInt(numericValue) >= 1 && parseInt(numericValue) <= 5)) {
       setValue(numericValue);
       setError('');
-      // console.log('Value is between 1 and 5:', text);
     } 
     else {
       setError('Value must be between 1 and 5');
-      // console.log('Error Message: ', error)
     }
   };
 
@@ -93,12 +133,20 @@ const Amount = ({route, navigation}) => {
             style={[styles.button, isDisabled ? styles.disabledButton : styles.enabledButton]}
             disabled={isDisabled}
             onPress={() => {
-              navigation.navigate('DateTimeScreen', {amount: value});
+              navigation.navigate('DateTimeScreen', {
+                amount: value,
+                date: date,
+                time: time,
+                Routebuilding: Routebuilding,
+                Routestreet: Routestreet,
+                Routezone: Routezone,
+              });
               console.log('amountAMOUNT.JS: ', value)
             }}
           >
             <Text style={styles.buttonText}>Continue</Text>
           </TouchableOpacity>
+
         </View>
 
     </View>
