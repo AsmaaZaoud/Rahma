@@ -15,6 +15,8 @@ import Done from './Donor/Done';
 import History from './Donor/History';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SignUp from './Donor/SignUp';
+import Login from './Donor/Login';
 
 //stack navigation
 const Stack = createNativeStackNavigator();
@@ -55,6 +57,8 @@ export default function App() {
               />
             )}
             {/* <Stack.Screen name="Onboarding" component={Onboard} options={{ headerShown: false }}/> */}
+            <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }}/>
+            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
             <Stack.Screen name="Amount" component={Amount} options={{ headerShown: false }}/>
             <Stack.Screen name="DateTimeScreen" component={DateTimeScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Address" component={Address} options={{ headerShown: false }}/>
