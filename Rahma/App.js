@@ -17,6 +17,8 @@ import History from './Donor/History';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SignUp from './Donor/SignUp';
 import Login from './Donor/Login';
+import Feedback from './Donor/Feedback';
+import Profile from './Donor/Profile';
 
 //stack navigation
 const Stack = createNativeStackNavigator();
@@ -65,6 +67,8 @@ export default function App() {
             <Stack.Screen name="Confirm" component={Confirm} options={{ headerShown: false }}/>
             <Stack.Screen name="Done" component={Done} options={{ headerShown: false }}/>
             <Stack.Screen name="History" component={History} options={{ headerShown: false }}/>
+            <Stack.Screen name="Feedback" component={Feedback} options={{ headerShown: false }}/>
+            <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </NavigationContainer>
       )

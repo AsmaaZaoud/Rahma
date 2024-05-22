@@ -31,6 +31,8 @@ export function normalize(size) {
 
 const Address = ({ route, navigation }) => {
 
+  let user = auth?.currentUser?.email;
+
   // const isFocused = useIsFocused();
 
   const [donationArray, setDonationArray] = useState([])
@@ -43,31 +45,6 @@ const Address = ({ route, navigation }) => {
   const [markB, setMarkB] = useState(null)
   const [markS, setMarkS] = useState(null)
   const [markZ, setMarkZ] = useState(null)
-
-  // useEffect(() => {
-  //   if (isFocused) {
-  //     read();
-  //   }
-  // }, [isFocused]);
-
-  // const read = async () => {
-  //   const docs = await getDocs(query(collection(db, "donationDetails"), where("email", "==", user)));
-  //   docs.forEach((doc) => {
-  //     // doc.data() is never undefined for query doc snapshots
-  //     console.log(doc.id, " => ", doc.data());
-  //   });
-
-  //   let temp = [];
-
-  //   docs.forEach((doc) => {
-  //     temp.push({
-  //       buildingNo: doc.data().buildingNo,
-  //       street: doc.data().street,
-  //       zone: doc.data().zone,
-  //     })
-  //   })
-  //   setDonationArray(temp)
-  // }
 
   // confirm (edit) -> amount -> dateTime -> address (this page)
   useEffect(() => {
@@ -90,13 +67,13 @@ const Address = ({ route, navigation }) => {
 
     const bNo = text.replace(/[^\d]/g, '');
 
-    if (bNo === text) {
+    if (bNo === text && (parseInt(bNo) >= 1 && parseInt(bNo) <= 9999)) {
       setBuildingNo(bNo)
       setBuildingNoError('')
       setMarkB(null)
     }
     else {
-      setBuildingNoError('Building No. must be a number')
+      setBuildingNoError('Building No. must be a number between 1 and 9999')
       setMarkB(require('./images/warning.png'))
     }
   }
@@ -105,13 +82,13 @@ const Address = ({ route, navigation }) => {
 
     const SNo = text.replace(/[^\d]/g, '');
 
-    if (SNo === text) {
+    if (SNo === text && (parseInt(SNo) >= 1 && parseInt(SNo) <= 999)) {
       setStreet(SNo)
       setStreetError('')
       setMarkS(null)
     }
     else {
-      setStreetError('Street must be a number')
+      setStreetError('Street must be a number between 1 and 999')
       setMarkS(require('./images/warning.png'))
     }
   }
@@ -213,6 +190,7 @@ const Address = ({ route, navigation }) => {
         <TouchableOpacity
           style={[styles.button, isContinueDisabled ? styles.disabledButton : styles.enabledButton]}
           disabled={isContinueDisabled}
+
           onPress={() => {
             navigation.navigate('Confirm',
               {

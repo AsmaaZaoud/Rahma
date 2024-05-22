@@ -114,6 +114,9 @@ const SignUp = ( {navigation} ) => {
     await setDoc(docRef, {
       userName: username,
       email: email.toLowerCase(),
+      buildingNo: null,
+      street: null,
+      zone: null
     })
       .then(() => {
         console.log("data submitted");
