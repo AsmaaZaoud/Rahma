@@ -6,21 +6,6 @@ import
 } 
 from 'react-native';
 
-import {
-  doc,
-  setDoc,
-  addDoc,
-  collection,
-  getDocs,
-  getDoc,
-  query,
-  where,
-  deleteDoc,
-  updateDoc,
-  deleteField,
-} from "firebase/firestore";
-import { db, auth } from "../config";
-
 //responsiveness
 const { width, height } = Dimensions.get("screen");
 const scale = width / 428;
@@ -138,41 +123,6 @@ const DateTimeScreen = ({ route, navigation }) => {
       console.log("time value, :", optionValue)
     };
 
-    let user = auth?.currentUser?.email;
-
-    const readAllWhere = async () => {
-      const q = query(collection(db, "donors"), where("email", "==", user));
-      const docs = await getDocs(q);
-      docs.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log("DATE TIME READ ALL WHERE")
-      console.log(doc.id, " => ", doc.data());
-      console.log(doc.data().zone)
-      if (doc.data().zone === null && doc.data().street === null && doc.data().buildingNo === null){
-        navigation.navigate('Address', {
-          selectedDateRange: selectedDateRange,
-          selectedTimeOfDay: selectedTimeOfDay,
-          amount: amount,
-          Routebuilding: Routebuilding,
-          Routestreet: Routestreet,
-          Routezone: Routezone,
-        })
-        console.log('DATETIMESCREEN ROUTE PARAMS amount: ', amount);
-        console.log('ROUTE PARAMS: ', route.params.amount)
-      }
-      else {
-        navigation.navigate('Confirm', {
-          selectedDateRange: selectedDateRange,
-          selectedTimeOfDay: selectedTimeOfDay,
-          amount: amount,
-          Routebuilding: Routebuilding,
-          Routestreet: Routestreet,
-          Routezone: Routezone,
-        })
-      }
-      });
-      }  
-
     const isContinueDisabled = selectedDateRange === null || selectedTimeOfDay === null;
 
     return (
@@ -258,19 +208,18 @@ const DateTimeScreen = ({ route, navigation }) => {
         <TouchableOpacity
         style={[styles.button, isContinueDisabled && styles.disabledButton]}
         disabled={isContinueDisabled}
-        onPress={readAllWhere}
-        // onPress={() => {
-        //   navigation.navigate('Address', {
-        //     selectedDateRange: selectedDateRange,
-        //     selectedTimeOfDay: selectedTimeOfDay,
-        //     amount: amount,
-        //     Routebuilding: Routebuilding,
-        //     Routestreet: Routestreet,
-        //     Routezone: Routezone,
-        //   })
-        //   console.log('DATETIMESCREEN ROUTE PARAMS amount: ', amount);
-        //   console.log('ROUTE PARAMS: ', route.params.amount)
-        // }}
+        onPress={() => {
+          navigation.navigate('Address', {
+            selectedDateRange: selectedDateRange,
+            selectedTimeOfDay: selectedTimeOfDay,
+            amount: amount,
+            Routebuilding: Routebuilding,
+            Routestreet: Routestreet,
+            Routezone: Routezone,
+          })
+          console.log('DATETIMESCREEN ROUTE PARAMS amount: ', amount);
+          console.log('ROUTE PARAMS: ', route.params.amount)
+        }}
       >
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>

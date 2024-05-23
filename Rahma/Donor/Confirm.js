@@ -18,28 +18,78 @@ export function normalize(size) {
   }
 }
 
+//reload
+import { useIsFocused } from "@react-navigation/native";
+
 //firebase keep
 import { db, auth } from "../config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc, getDocs, query, where} from "firebase/firestore";
 
 const Confirm = ({route, navigation}) => {
 
+  useEffect(() => {
+    if (isFocused) {
+      readAllWhere()
+    }
+  }, [isFocused]);
+
+  const [buildingNo, setBuildingNo] = useState(route.params.buildingNo)
+  const [street, setStreet] = useState(route.params.street)
+  const [zone, setZone] = useState(route.params.zone)
+
   let user = auth?.currentUser?.email;
+  
+  const isFocused = useIsFocused();
 
   let trackId = Math.floor(Math.random() * 10000);
+
+  const addAddress = async () => {
+    const docRef2 = doc(db, "donors", user);
+    await setDoc(docRef2, {
+      buildingNo: buildingNo,
+      street: street,
+      zone: zone,
+    }, { merge: true })
+      .then(() => {
+        console.log("data submitted for address page");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+
+  const readAllWhere = async () => {
+    const q = query(collection(db, "donors"), where("email", "==", user));
+    const docs = await getDocs(q);
+    docs.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    console.log("CONFIRM READ ALL WHERE")
+    console.log(doc.id, " => ", doc.data());
+    console.log(doc.data().zone)
+    if (doc.data().zone === null && doc.data().street === null && doc.data().buildingNo === null){
+      addAddress()
+    }
+    else {
+      setBuildingNo(doc.data().buildingNo)
+      setStreet(doc.data().street)
+      setZone(doc.data().zone)
+    }
+    });
+    }    
 
     const add = async () => {
       const docRef = await addDoc(collection(db, "donationDetails"), {
         dateRange: route.params.selectedDateRange,
         timeRange: route.params.selectedTimeOfDay,
         amount: route.params.amount,
-        buildingNo: route.params.buildingNo,
-        street: route.params.street,
-        zone: route.params.zone,
+        buildingNo: buildingNo,
+        street: street,
+        zone: zone,
         trackID: trackId,
         email: user
       });
       console.log("Document written with ID: ", docRef.id);
+      // readAllWhere()
     };
 
     return (
@@ -58,6 +108,18 @@ const Confirm = ({route, navigation}) => {
           <Text style={{fontSize: normalize(20), paddingBottom: '10%'}}>Your track ID is: {trackId}</Text>
 
           <View style={styles.DateTimeBox}>
+
+          <View style={styles.amount}>
+                <Text style={styles.text}>Amount</Text>
+                <View style={{paddingTop: '10%'}}></View>
+                <Image
+                  source={require('./images/clothing.png')}
+                  style={styles.image}
+                ></Image>
+                <View style={{marginTop: '5%'}}></View>
+                <Text style={{fontSize: normalize(18)}}>{route.params.amount} boxes/bags</Text>
+            </View>
+
             <View style={styles.date}>
                 <Text style={styles.text}>When</Text>
                 <View style={{paddingTop: '10%'}}></View>
@@ -71,16 +133,6 @@ const Confirm = ({route, navigation}) => {
                     </View>
             </View>
 
-            <View style={styles.amount}>
-                <Text style={styles.text}>Amount</Text>
-                <View style={{paddingTop: '10%'}}></View>
-                <Image
-                  source={require('./images/clothing.png')}
-                  style={styles.image}
-                ></Image>
-                <View style={{marginTop: '5%'}}></View>
-                <Text style={{fontSize: normalize(18)}}>{route.params.amount} boxes/bags</Text>
-            </View>
           </View>
 
           <View style={styles.locationBox}>
@@ -91,9 +143,9 @@ const Confirm = ({route, navigation}) => {
                 style={styles.image}
             ></Image>
             <Text style={{fontSize: normalize(18)}}>
-                Building: {route.params.buildingNo} {" "}
-                Street: {route.params.street} {" "}
-                Zone: {route.params.zone}
+                Building: {buildingNo} {" "}
+                Street: {street} {" "}
+                Zone: {zone}
             </Text>
           </View>
 
@@ -108,9 +160,9 @@ const Confirm = ({route, navigation}) => {
                 amount: route.params.amount,
                 date: route.params.selectedDateRange,
                 time: route.params.selectedTimeOfDay,
-                buildingNo: route.params.buildingNo,
-                street: route.params.street,
-                zone: route.params.zone,
+                buildingNo: buildingNo,
+                street: street,
+                zone: zone,
               } )
             }
           >

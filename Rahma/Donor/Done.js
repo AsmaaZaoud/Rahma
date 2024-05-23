@@ -34,7 +34,6 @@ const Done = ({route, navigation}) => {
             <Text style={{fontSize: normalize(20), marginTop: '15%', marginBottom: '5%'}}>
                 You can view your history from below: 
             </Text>
-
             
           {/* <View style={{paddingTop: "15%"}}> */}
             <View>
@@ -58,6 +57,28 @@ const Done = ({route, navigation}) => {
             }}
           >
             <Text style={styles.buttonText}>Make another donation</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Feedback');
+            }}
+          >
+            <Text style={styles.buttonText}>Feedback</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Profile');
+            }}
+          >
+            <Text style={styles.buttonText}>Profile</Text>
           </TouchableOpacity>
         </View>
 
